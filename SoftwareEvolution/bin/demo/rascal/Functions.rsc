@@ -1,4 +1,4 @@
-module demo::basic::Functions
+module demo::rascal::Functions
 
 rel[int, int] invert(rel[int,int] R){
 	return {<Y, X> | <int X, int Y> <- R };

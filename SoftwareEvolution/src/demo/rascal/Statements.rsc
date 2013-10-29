@@ -1,4 +1,4 @@
-module demo::basic::Statements
+module demo::rascal::Statements
 
 import IO;
 

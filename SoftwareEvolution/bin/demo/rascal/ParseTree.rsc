@@ -89,7 +89,7 @@ Questions:
 
 }
 
-module demo::basic::ParseTree
+module demo::rascal::ParseTree
 
 extend Type;
 import Message;

@@ -1,4 +1,4 @@
-module demo::basic::TypeConstraints
+module demo::rascal::TypeConstraints
 
 import Number;
 import Node;

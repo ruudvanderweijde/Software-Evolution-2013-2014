@@ -1,4 +1,4 @@
-module demo::basic::Expressions
+module demo::rascal::Expressions
 
 // alot of stuff like haskell
 

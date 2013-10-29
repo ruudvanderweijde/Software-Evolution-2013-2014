@@ -1,4 +1,4 @@
-module demo::basic::Patterns
+module demo::rascal::Patterns
 
 import IO;
 

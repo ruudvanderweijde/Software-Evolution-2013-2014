@@ -1,1 +1,0 @@
-module demo::basic::Declarations

@@ -1,4 +1,4 @@
-module demo::basic::HelloWorld
+module demo::rascal::HelloWorld
 
 import IO;
 
