@@ -30,13 +30,11 @@ println ("dir: <dir>");
 	      			    append (crawl(sub, suffix));	      			    
 	      } else {
 		          if(endsWith(entry, suffix)) {
-		          	    append [sub];
+		          	    append sub;
 		          	}
 	      }
-	  } append (|std://library/demo/Uninit.rsc|);
+	  }
 }
-
-public list[loc] mergeCustom(list[loc] x, list[loc] y) { return merge (x, y); }
 
 public list[loc] crawl3(loc dir, str suffix) =
   isDirectory(dir) ? [crawl(e,suffix) | e <- dir.ls] : (dir.extension == suffix ? [dir] : []);
