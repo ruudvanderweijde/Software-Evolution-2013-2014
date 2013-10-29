@@ -32,9 +32,7 @@ println ("dir: <dir>");
 		          if(endsWith(entry, suffix)) {
 		          println("sub: <sub>");
 		          	    append reducer ([sub], mergeCustom, []);
-		          } else {
-		          	 append [];
-		          	 }
+		          	}
 	      }
 	  };
 }
@@ -42,4 +40,4 @@ println ("dir: <dir>");
 public list[loc] mergeCustom(list[loc] x, list[loc] y) { return merge (x, y); }
 
 public list[loc] crawl3(loc dir, str suffix) =
-  isDirectory(dir) ? [crawl(e,ext) | e <- dir.ls] : (dir.extension == ext ? [dir] : []);
+  isDirectory(dir) ? [crawl(e,suffix) | e <- dir.ls] : (dir.extension == suffix ? [dir] : []);
