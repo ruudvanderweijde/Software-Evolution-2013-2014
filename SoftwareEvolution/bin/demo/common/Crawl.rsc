@@ -27,14 +27,13 @@ println ("dir: <dir>");
 	      loc sub = dir + entry;  
 	      
 	      if(isDirectory(sub)) {
-	      			    append reducer ((crawl(sub, suffix)), mergeCustom, []);  
+	      			    append (crawl(sub, suffix));	      			    
 	      } else {
 		          if(endsWith(entry, suffix)) {
-		          println("sub: <sub>");
-		          	    append reducer ([sub], mergeCustom, []);
+		          	    append [sub];
 		          	}
 	      }
-	  };
+	  } append (|std://library/demo/Uninit.rsc|);
 }
 
 public list[loc] mergeCustom(list[loc] x, list[loc] y) { return merge (x, y); }
