@@ -36,6 +36,7 @@ public int countInLine2(str S){
 public int countInLine3(str S){
   return (0 | it + 1 | /\w+/ := S);
 }
+
 public list[str] Jabberwocky = [
 	"Jabberwocky by Lewis Carroll",
 	"",
