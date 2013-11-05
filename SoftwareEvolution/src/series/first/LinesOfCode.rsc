@@ -1,21 +1,19 @@
-module series::first::Analyse
+module series::first::LinesOfCode
 
 import IO;
+import lang::java::jdt::Project;
 
-public int linesInDir(loc dir) {
-  int res = 0;
-  for(str entry <- listEntries(dir)){
-      loc sub = dir + entry;   
-      if(isDirectory(sub)) {
-          res += linesInDir(sub);
-      } else {
-	      res += linesInFile(sub); 
-      }
-  };
-  return res;
+public int linesOfProject(loc project) {
+	set[value] files = sourceFilesForProject(project);
+	int totalLines = 0;
+	for (file <- files) {
+	//println("<file>");
+		totalLines += linesOfFile(file);
+	}
+	return totalLines;
 }
-
-public int linesInFile(loc file) {
+	
+public int linesOfFile(loc file) {
 	int res = 0;
 	bool comment = false;
 	for (line <- readFileLines(file)) {
@@ -29,7 +27,7 @@ public int linesInFile(loc file) {
 		}
 		// start of marking code as commented
 		if (/\/\*/ := line) {
-			println("start of comment: <line>");
+			//println("start of comment: <line>");
 			comment = true;
 		}
 		if (comment == false) {
@@ -37,7 +35,7 @@ public int linesInFile(loc file) {
 		}
 		// end of marking code as commented
 		if (/\*\// := line) {
-			println("end of comment: <line>");
+			//println("end of comment: <line>");
 			comment = false;
 		}
 	};
