@@ -15,6 +15,7 @@ public int linesInDir(loc dir) {
   return res;
 }
 
+//comment
 public int linesInFile(loc file) {
 	int res = 0;
 	bool comment = false;
