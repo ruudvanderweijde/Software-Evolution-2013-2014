@@ -1,1 +1,4 @@
 http://www.slideshare.net/onierstrasz/what-i-learnerascal
+
+LOC: http://msquaredtechnologies.com/m2rsm/docs/rsm_metrics_narration.htm
+Cyc: http://msquaredtechnologies.com/m2rsm/docs/cyclocomplex/cyclo_1.htm
