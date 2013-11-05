@@ -1,5 +1,5 @@
 // comment
-package test.series.first;
+package test.series.first.loc;
 
 // single lines
 

@@ -2,3 +2,10 @@ http://www.slideshare.net/onierstrasz/what-i-learnerascal
 
 LOC: http://msquaredtechnologies.com/m2rsm/docs/rsm_metrics_narration.htm
 Cyc: http://msquaredtechnologies.com/m2rsm/docs/cyclocomplex/cyclo_1.htm
+
+
+rascal>linesOfProject(|project://smallsql0.21_src/src|);
+int: 24016
+
+rascal>linesOfProject(|project://hsqldb-2.3.1/hsqldb/src|);
+int: 168926
