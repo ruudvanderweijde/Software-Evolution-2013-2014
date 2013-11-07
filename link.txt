@@ -4,8 +4,16 @@ LOC: http://msquaredtechnologies.com/m2rsm/docs/rsm_metrics_narration.htm
 Cyc: http://msquaredtechnologies.com/m2rsm/docs/cyclocomplex/cyclo_1.htm
 
 
+
+First results:
 rascal>linesOfProject(|project://smallsql0.21_src/src|);
 int: 24016
 
 rascal>linesOfProject(|project://hsqldb-2.3.1/hsqldb/src|);
 int: 168926
+
+
+
+Links on the SIG model:
+http://docs.codehaus.org/display/SONAR/SIG+Maintainability+Model+Plugin (this includes a sonar(?)plugin and a metric for unit size)
+http://homepages.cwi.nl/~paulk/thesesMasterSoftwareEngineering/2008/FrankOppedijk.pdf (Master thesis: Comparison of the SIG Maintainability Model and the Maintainability Index)
