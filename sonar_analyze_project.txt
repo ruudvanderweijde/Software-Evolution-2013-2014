@@ -1,0 +1,12 @@
+initialize projects:
+
+run cmd.exe as administrator
+
+cd C:\GIT\Software-Evolution-2013-2014\HelloWorld
+sonar-runner
+cd ..
+cd HSQLDB
+sonar-runner
+cd ..
+cd SmallSQL
+sonar-runner
