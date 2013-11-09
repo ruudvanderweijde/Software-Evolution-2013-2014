@@ -17,9 +17,13 @@ public int getScoreOfUnitSize(loc project) {
 	int high = size((x : sizes[x] | x <- sizes, sizes[x] <= 100, sizes[x] > 50 ));
 	int medium = size((x : sizes[x] | x <- sizes, sizes[x] <= 50, sizes[x] > 10 ));
 	
-	int percVeryHigh 	= veryHigh 	* 100 / total;
-	int percHigh 		= high 		* 100 / total;
-	int percMedium		= medium	* 100 / total;
+	num percVeryHigh 	= (veryHigh 	/ total) * 100;
+	num percHigh 		= (high 		/ total) * 100;
+	num percMedium		= (medium		/ total) * 100;
+	
+	println("debug: percVeryHigh = <percVeryHigh>");
+	println("debug: percHigh = <percHigh>");
+	println("debug: percMedium = <percMedium>");
 	
 	//based on information of http://docs.codehaus.org/display/SONAR/SIG+Maintainability+Model+Plugin
 	if 		(percMedium <= 25 && percHigh <= 0  && percVeryHigh <= 0) return 2;
@@ -30,7 +34,7 @@ public int getScoreOfUnitSize(loc project) {
 }
 
 public map[loc, int] getUnitSizePerFile(project) {
-	return (method:linesOfFile(method) | method <- methods(createM3FromEclipseProject(project)));
+	return (method:size(linesOfFile(method)) | method <- methods(createM3FromEclipseProject(project)));
 }
 
 public loc testFile0 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/EmptyClass.java|;
@@ -40,8 +44,8 @@ public loc testFile3 = |project://SoftwareEvolution/src/test/series/first/SMM/Vo
 public loc testFile4 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/Annotations.java|;
 
 
-public test bool linesInFile0() = linesOfFile(testFile0) == 3;
-public test bool linesInFile1() = linesOfFile(testFile1) == 6;
-public test bool linesInFile2() = linesOfFile(testFile2) == 6;
-public test bool linesInFile3() = linesOfFile(testFile3) == 6;
-public test bool linesInFile3() = linesOfFile(testFile4) == 39;
+public test bool linesInFile0() = size(linesOfFile(testFile0)) == 3;
+public test bool linesInFile1() = size(linesOfFile(testFile1)) == 6;
+public test bool linesInFile2() = size(linesOfFile(testFile2)) == 6;
+public test bool linesInFile3() = size(linesOfFile(testFile3)) == 6;
+public test bool linesInFile3() = size(linesOfFile(testFile4)) == 39;

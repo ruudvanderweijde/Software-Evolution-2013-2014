@@ -20,11 +20,22 @@ public loc project2 = |project://HelloWorld|;
 
 public void displayIndex(loc project) {
 	map[str, int] pp = getProductProperties(project);
-	map[str, int] mi = getMaintainabilityIndex(pp);
+	println("-----------------------------------");
+	printMI(pp);
+	println("-----------------------------------");
+	map[str, int] mi = productPropertiesToMaintainabilityIndex(pp);
 	printMI(mi);
 }
 
 public map[str, int] productPropertiesToMaintainabilityIndex(map[str, int] pp) {
+	println("analisability : (<pp["Volume"]> + <pp["Duplication"]> + <pp["UnitSize"]> + <pp["UnitTesting"]>) / 4");
+	println("Res: <(pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4>");
+	println("changeability : (<pp["Complexity"]> + <pp["Duplication"]>) / 2,");
+	println("Res: <(pp["Complexity"] + pp["Duplication"]) / 2>");
+	println("stability		: (<pp["UnitTesting"]>),");
+	println("Res: <(pp["UnitTesting"])>");
+	println("testability	: (<pp["Complexity"]> + <pp["UnitSize"]> + <pp["UnitTesting"]>) / 3");
+	println("Res: <(pp["Complexity"] + pp["UnitSize"] + pp["UnitTesting"]) / 3>");
 	return (
 		"analisability" : (pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4,
 		"changeability" : (pp["Complexity"] + pp["Duplication"]) / 2,
@@ -44,7 +55,7 @@ public map[str, int] getProductProperties(loc project) {
 }
 
 public void printMI (map[str, int] mapMI) {
-	for(x:y <- mapMI) { 
+	for(x <- mapMI) { 
 		println("<x>: \t<measureToString(mapMI[x])>");
 	}
 }

@@ -1,11 +1,13 @@
 module series::first::SMM::Volume
 
 import IO;
+import List;
 import String;
 import lang::java::jdt::Project;
 
 public int getScoreOfVolume(loc project) {
-	int linesOfJava = linesOfProject(project);
+	int linesOfJava = (0 | it + size(linesOfFile(f)) | loc f <- sourceFilesForProject(project));
+	println("debug: linesOfJava: <linesOfJava>");
 	
 	if 		(linesOfJava < 66000)	return 2;
 	else if (linesOfJava < 246000)	return 1;
@@ -13,40 +15,32 @@ public int getScoreOfVolume(loc project) {
 	else if (linesOfJava < 1310000)	return -1;
 	else 							return -2;
 }
-
-public int linesOfProject(loc project) {
-	set[value] files = sourceFilesForProject(project);
-	int totalLines = 0;
-	for (file <- files) {
-		totalLines += linesOfFile(file);
-	}
-	return totalLines;
-}
 	
-public int linesOfFile(loc file) {
-	int res = 0;
-	str fileString = readFile(file);
-	// strip multiline comments
+public list[str] linesOfFile(loc file) {
+	return 
+		for (line <- split("\n", stripMultiLineComments(readFile(file)))) {
+			// skip empty lines
+			if (/^[ \t]*$/ := line) {
+				continue;
+			}
+			// skip lines starting with //
+			if (/^[ \t]*\/\// := line) {
+				continue;
+			}
+			append line;
+		};
+}
+
+private str stripMultiLineComments(str fileString) {
 	for (/<commentML:\/\*(?s).*?\*\/>/ := fileString) {
 		if (/\n/ := commentML) {
-			// if the comments contain new lines, replace it with a new line
+			// if the comment contains new lines, replace it with a new line
 			fileString = replaceFirst(fileString, commentML, "\n");
 		} else {
 			fileString = replaceFirst(fileString, commentML, "");
 		}
 	}
-	for (line <- split("\n", fileString)) {
-		// skip empty lines
-		if (/^[ \t]*$/ := line) {
-			continue;
-		}
-		// skip lines starting with //
-		if (/^[ \t]*\/\// := line) {
-			continue;
-		}
-		res += 1;
-	};
-	return res;
+	return fileString;
 }
 
 private loc testFile0 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/EmptyClass.java|;
@@ -56,8 +50,8 @@ private loc testFile3 = |project://SoftwareEvolution/src/test/series/first/SMM/V
 private loc testFile4 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/Annotations.java|;
 
 
-public test bool linesInFile0() = linesOfFile(testFile0) == 3;
-public test bool linesInFile1() = linesOfFile(testFile1) == 6;
-public test bool linesInFile2() = linesOfFile(testFile2) == 6;
-public test bool linesInFile3() = linesOfFile(testFile3) == 6;
-public test bool linesInFile3() = linesOfFile(testFile4) == 39;
+public test bool linesInFile0() = size(linesOfFile(testFile0)) == 3;
+public test bool linesInFile1() = size(linesOfFile(testFile1)) == 6;
+public test bool linesInFile2() = size(linesOfFile(testFile2)) == 6;
+public test bool linesInFile3() = size(linesOfFile(testFile3)) == 6;
+public test bool linesInFile3() = size(linesOfFile(testFile4)) == 39;
