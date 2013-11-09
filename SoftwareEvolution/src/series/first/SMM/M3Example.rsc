@@ -1,4 +1,4 @@
-module series::first::M3Example
+module series::first::SMM::M3Example
 
 import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
