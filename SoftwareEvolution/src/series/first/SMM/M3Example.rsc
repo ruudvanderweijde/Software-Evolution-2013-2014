@@ -24,6 +24,7 @@ public void printTotaNumberOfStatementsInProject() {
 
 public void printStuff() {
 	myModel = createM3FromEclipseProject(|project://CodeAnalysisExamples|);
+	println(myModel);
 	methodAST = getMethodASTEclipse(|java+method:///MyHelloWorld/a()|, model=myModel);
 	int totalExp = (0 | it + 1 | /Expression _ := methodAST);
 	int totalDecl = (0 | it + 1 | /Declaration _ := methodAST);
@@ -33,7 +34,7 @@ public void printStuff() {
 	int total = 0;	
 	int totalMethodCalls = 0;
 	
-	iprintln(methodAST);
+	// iprintln(methodAST);
 	visit(methodAST) {
 		 case \declarationStatement(_) : total = total + 1 ;
 		 case m:methodCall(_, _, _) : { iprintln(m); totalMethodCalls = totalMethodCalls + 1;}
