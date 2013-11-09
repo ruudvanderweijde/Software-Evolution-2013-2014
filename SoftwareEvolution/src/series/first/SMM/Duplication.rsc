@@ -1,5 +1,10 @@
 module series::first::SMM::Duplication
 
-public str getScoreOfDuplication(loc project) {
-	return "to implement";
+import IO;
+import String;
+import lang::java::jdt::Project;
+
+public int getScoreOfDuplication(loc project) {
+	return 0;
+	
 }

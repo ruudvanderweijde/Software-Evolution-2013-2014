@@ -4,14 +4,14 @@ import IO;
 import String;
 import lang::java::jdt::Project;
 
-public str getScoreOfVolume(loc project) {
+public int getScoreOfVolume(loc project) {
 	int linesOfJava = linesOfProject(project);
 	
-	if 		(linesOfJava < 66000)	return "++";
-	else if (linesOfJava < 246000)	return "+";
-	else if (linesOfJava < 665000)	return "o";
-	else if (linesOfJava < 1310000)	return "-";
-	else 							return "--";
+	if 		(linesOfJava < 66000)	return 2;
+	else if (linesOfJava < 246000)	return 1;
+	else if (linesOfJava < 665000)	return 0;
+	else if (linesOfJava < 1310000)	return -1;
+	else 							return -2;
 }
 
 public int linesOfProject(loc project) {
@@ -49,11 +49,11 @@ public int linesOfFile(loc file) {
 	return res;
 }
 
-private loc testFile0 = |project://SoftwareEvolution/src/test/series/first/loc/EmptyClass.java|;
-private loc testFile1 = |project://SoftwareEvolution/src/test/series/first/loc/NormalClass.java|;
-private loc testFile2 = |project://SoftwareEvolution/src/test/series/first/loc/SingleCommentedClass.java|;
-private loc testFile3 = |project://SoftwareEvolution/src/test/series/first/loc/MultilineCommentedClass.java|;
-private loc testFile4 = |project://SoftwareEvolution/src/test/series/first/loc/Annotations.java|;
+private loc testFile0 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/EmptyClass.java|;
+private loc testFile1 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/NormalClass.java|;
+private loc testFile2 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/SingleCommentedClass.java|;
+private loc testFile3 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/MultilineCommentedClass.java|;
+private loc testFile4 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/Annotations.java|;
 
 
 public test bool linesInFile0() = linesOfFile(testFile0) == 3;

@@ -1,5 +1,5 @@
 module series::first::SMM::UnitTesting
 
-public str getScoreOfUnitTesting(loc project) {
-	return "to implement";
+public int getScoreOfUnitTesting(loc project) {
+	return 0;
 }

@@ -19,10 +19,60 @@ public loc project1 = |project://hsqldb-2.3.1|;
 public loc project2 = |project://HelloWorld|;
 
 public void displayIndex(loc project) {
-	println("Volume = <getScoreOfVolume(project)>");
-	println("Complexity = <getScoreOfComplexity(project)>");
-	println("Duplication = <getScoreOfDuplication(project)>");
-	println("UnitSize = <getScoreOfUnitSize(project)>");
-	println("UnitTesting = <getScoreOfUnitTesting(project)>");	
+	map[str, int] pp = getProductProperties(project);
+	map[str, int] mi = getMaintainabilityIndex(pp);
+	printMI(mi);
 }
 
+public map[str, int] productPropertiesToMaintainabilityIndex(map[str, int] pp) {
+	return (
+		"analisability" : (pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4,
+		"changeability" : (pp["Complexity"] + pp["Duplication"]) / 2,
+		"stability"		: (pp["UnitTesting"]),
+		"testability"	: (pp["Complexity"] + pp["UnitSize"] + pp["UnitTesting"]) / 3
+	);
+}
+
+public map[str, int] getProductProperties(loc project) {
+	return (
+		"Volume" 		: getScoreOfVolume(project),
+		"Complexity" 	: getScoreOfComplexity(project),
+		"Duplication"	: getScoreOfDuplication(project),
+		"UnitSize"		: getScoreOfUnitSize(project),
+		"UnitTesting"	: getScoreOfUnitTesting(project)
+	);	
+}
+
+public void printMI (map[str, int] mapMI) {
+	for(x:y <- mapMI) { 
+		println("<x>: \t<measureToString(mapMI[x])>");
+	}
+}
+
+public str measureToString(int measure) {
+	switch (measure) {
+		case 2:  return "++";
+		case 1:  return "+";
+		case 0:  return "o";
+		case -1: return "-";
+		case -2: return "--";
+	}
+}
+
+// example from the paper
+public map[str, int] pp1 = (	
+	"Volume" 		: 2,
+	"Complexity" 	: -2,
+	"Duplication"	: -1,
+	"UnitSize"		: -1,
+	"UnitTesting"	: 0
+	);
+	
+public map[str, int] mi1 = (	
+	"analisability" : 0,
+	"changeability" : -1,
+	"stability"		: 0,
+	"testability"	: -1
+	);
+	
+public test bool ppToMI1() = mi1 == productPropertiesToMaintainabilityIndex(pp1);
