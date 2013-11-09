@@ -15,6 +15,7 @@ public map[str,int] initializeStmtMap() {
 	mapPar += ("CASE_DEFAULT":0);	
 	mapPar += ("FOR" : 0);	
 	mapPar += ("WHILE": 0);	
+	mapPar += ("DO" : 0);
 	mapPar += ("BREAK" : 0);	
 	mapPar += ("CONTINUE" : 0);
 	mapPar += ("SHORTCUT_IF" : 0); 
@@ -36,18 +37,27 @@ public void printMap(map[str, int] mapPar) {
 public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 	methodAST = getMethodASTEclipse(methodName, model = myModel);
 	map[str, int] stmtMap = initializeStmtMap(); 
-	printMap(stmtMap);
 	visit(methodAST) {
 		case \return(_) 	: stmtMap["RETURN"] +=  1;
     	case \return()		: stmtMap["RETURN"] +=  1;
     	case \if(_,_)		: stmtMap["IF"] += 1;
     	case \if(_,_,_) 	: stmtMap["IF_ELSE"] += 1;
     	case \case(_)		: stmtMap["CASE"] += 1;
-    	case \defaultcase() : stmtMap["CASE_DEFAULT"] += 1;
-    	
-		 //case \declarationStatement(_) : total = total + 1 ;
-		 //case m:methodCall(_, _, _) : { iprintln(m); totalMethodCalls = totalMethodCalls + 1;}
-		 //case Statement _ : ;
+    	case \defaultCase() : stmtMap["CASE_DEFAULT"] += 1;
+    	case \for(_,_,_)	: stmtMap["FOR"] += 1;
+    	case \for(_,_,_,_)  : stmtMap["FOR"] += 1;
+    	case \while(_,_)	: stmtMap["WHILE"] += 1;
+    	case \do(_,_)		: stmtMap["DO"] += 1;
+    	case \break()		: stmtMap["BREAK"] += 1;
+    	case \break(_)		: stmtMap["BREAK"] += 1;
+    	case \continue()	: stmtMap["CONTINUE"] += 1;
+    	case \continue(_)	: stmtMap["CONTINUE"] += 1;
+    	case \catch(_,_)	: stmtMap["CATCH"] += 1;
+    	case \try(_,_,_)	: stmtMap["FINALLY"] += 1;
+    	case \throw(_)		: stmtMap["THROW"] += 1;
+    	 
+		case \conditional(_,_,_) : stmtMap["SHORTCUT_IF"] += 1; 
+		// What do we do with the "THROWS"? 
 	}
 	printMap(stmtMap);		
 }
