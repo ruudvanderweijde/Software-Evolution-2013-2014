@@ -1,0 +1,59 @@
+rascal>displayIndex(project0);
+debug: linesOfJava: 24020
+debug: precentage dupes: 9.57951706900
+debug: percVeryHigh = 0
+debug: percHigh = 0
+debug: percMedium = 0
+-----------------------------------
+Duplication: 	o
+Complexity: 	o
+UnitTesting: 	o
+Volume: 	++
+UnitSize: 	++
+-----------------------------------
+analisability : (2 + 0 + 2 + 0) / 4
+Res: 1
+changeability : (0 + 0) / 2,
+Res: 0
+stability		: (0),
+Res: 0
+testability	: (0 + 2 + 0) / 3
+Res: 0
+changeability: 	o
+stability: 	o
+analisability: 	+
+testability: 	o
+ok
+
+rascal>2/3
+int: 0
+
+rascal>2.0/3.0
+real: 0.6666666667
+
+rascal>displayIndex(project1);
+debug: linesOfJava: 168932
+debug: precentage dupes: 15.7045438400
+debug: percVeryHigh = 0
+debug: percHigh = 0
+debug: percMedium = 0
+-----------------------------------
+Duplication: 	-
+Complexity: 	o
+UnitTesting: 	o
+Volume: 	+
+UnitSize: 	++
+-----------------------------------
+analisability : (1 + -1 + 2 + 0) / 4
+Res: 0
+changeability : (0 + -1) / 2,
+Res: 0
+stability		: (0),
+Res: 0
+testability	: (0 + 2 + 0) / 3
+Res: 0
+changeability: 	o
+stability: 	o
+analisability: 	o
+testability: 	o
+ok
