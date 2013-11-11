@@ -74,8 +74,8 @@ public void printStuff() {
 	myModel = createM3FromEclipseProject(|project://CodeAnalysisExamples|);
 	myMethods = methods(myModel);  
 	map [loc, num] = getUnitSizePerMethod(); 
-	map [loc, tuple[int linesOfCode, int cyclometicComplexity]] complexityMap = 
-									(|java+method:///|:<0,0>);
+	//map [loc, tuple[int linesOfCode, int cyclometicComplexity]] complexityMap = 
+									//(|java+method:///|:<0,0>);
 	int methodCycComplexity = 0;
 	int methodLength = 0;
 	for (methodLoc <- myMethods) { 
