@@ -5,6 +5,8 @@ import lang::java::jdt::m3::Core;
 import lang::java::jdt::m3::AST;
 import IO;
 import Map;
+import List;
+import series::first::SMM::UnitSize;
 
 public map[str,int] initializeStmtMap() {
 	map[str, int] mapPar = ("" : 0);
@@ -34,6 +36,7 @@ public void printMap(map[str, int] mapPar) {
 	}
 }
 
+
 public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 	methodAST = getMethodASTEclipse(methodName, model = myModel);
 	map[str, int] stmtMap = initializeStmtMap(); 
@@ -41,7 +44,7 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 		case \return(_) 	: stmtMap["RETURN"] +=  1;
     	case \return()		: stmtMap["RETURN"] +=  1;
     	case \if(_,_)		: stmtMap["IF"] += 1;
-    	case \if(_,_,_) 	: stmtMap["IF_ELSE"] += 1;
+    	case \if(_,_,_) 	: stmtMap["IF_ELSE"] += 2;  // If else means two decision points
     	case \case(_)		: stmtMap["CASE"] += 1;
     	case \defaultCase() : stmtMap["CASE_DEFAULT"] += 1;
     	case \for(_,_,_)	: stmtMap["FOR"] += 1;
@@ -60,10 +63,23 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 		// What do we do with the "THROWS"? 
 	}
 	printMap(stmtMap);		
+	int totalDecisionPoints = (0 | it + stmtMap[k] | k <- stmtMap ) ;
+	println("Total decision points for method <methodName> method is : <totalDecisionPoints>");
+	return totalDecisionPoints;
 }
 
 
 public void printStuff() {
+	loc sui = |project://CodeAnalysisExamples|;
 	myModel = createM3FromEclipseProject(|project://CodeAnalysisExamples|);
-	cyclometicComplexityPerMethod(|java+method:///MyHelloWorld/a()|, myModel);
+	myMethods = methods(myModel);  
+	map [loc, num] = getUnitSizePerMethod(); 
+	map [loc, tuple[int linesOfCode, int cyclometicComplexity]] complexityMap = 
+									(|java+method:///|:<0,0>);
+	int methodCycComplexity = 0;
+	int methodLength = 0;
+	for (methodLoc <- myMethods) { 
+		methodCycComplexity = cyclometicComplexityPerMethod(methodLoc, myModel);
+		complexityMap += (methodLoc:<methodCycComplexity,methodLength>);
+	}
 }
