@@ -3,6 +3,7 @@ module series::first::SMM
 
 import IO;
 import List;
+import util::Math;
 
 import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
@@ -19,15 +20,15 @@ public loc project1 = |project://hsqldb-2.3.1|;
 public loc project2 = |project://HelloWorld|;
 
 public void displayIndex(loc project) {
-	map[str, int] pp = getProductProperties(project);
+	map[str, num] pp = getProductProperties(project);
 	println("-----------------------------------");
 	printMI(pp);
 	println("-----------------------------------");
-	map[str, int] mi = productPropertiesToMaintainabilityIndex(pp);
+	map[str, num] mi = productPropertiesToMaintainabilityIndex(pp);
 	printMI(mi);
 }
 
-public map[str, int] productPropertiesToMaintainabilityIndex(map[str, int] pp) {
+public map[str, num] productPropertiesToMaintainabilityIndex(map[str, num] pp) {
 	println("analisability : (<pp["Volume"]> + <pp["Duplication"]> + <pp["UnitSize"]> + <pp["UnitTesting"]>) / 4");
 	println("Res: <(pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4>");
 	println("changeability : (<pp["Complexity"]> + <pp["Duplication"]>) / 2,");
@@ -37,14 +38,14 @@ public map[str, int] productPropertiesToMaintainabilityIndex(map[str, int] pp) {
 	println("testability	: (<pp["Complexity"]> + <pp["UnitSize"]> + <pp["UnitTesting"]>) / 3");
 	println("Res: <(pp["Complexity"] + pp["UnitSize"] + pp["UnitTesting"]) / 3>");
 	return (
-		"analisability" : (pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4,
-		"changeability" : (pp["Complexity"] + pp["Duplication"]) / 2,
-		"stability"		: (pp["UnitTesting"]),
-		"testability"	: (pp["Complexity"] + pp["UnitSize"] + pp["UnitTesting"]) / 3
+		"analisability" : round((pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4),
+		"changeability" : round((pp["Complexity"] + pp["Duplication"]) / 2),
+		"stability"		: round((pp["UnitTesting"])),
+		"testability"	: round((pp["Complexity"] + pp["UnitSize"] + pp["UnitTesting"]) / 3)
 	);
 }
 
-public map[str, int] getProductProperties(loc project) {
+public map[str, num] getProductProperties(loc project) {
 	return (
 		"Volume" 		: getScoreOfVolume(project),
 		"Complexity" 	: getScoreOfComplexity(project),
@@ -54,7 +55,7 @@ public map[str, int] getProductProperties(loc project) {
 	);	
 }
 
-public void printMI (map[str, int] mapMI) {
+public void printMI (map[str, num] mapMI) {
 	for(x <- mapMI) { 
 		println("<x>: \t<measureToString(mapMI[x])>");
 	}
