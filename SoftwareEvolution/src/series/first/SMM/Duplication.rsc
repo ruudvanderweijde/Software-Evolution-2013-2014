@@ -19,21 +19,53 @@ public int getScoreOfDuplication(loc project) {
 	else 								return -2;	
 }
 
-public num getPrecentageOfDuplication(loc project) {
+public num getPrecentageOfDuplication2(loc project) {
 	list[str] allLines = ([] | it + (linesOfFile(f)) | loc f <- sourceFilesForProject(project));
+	//println("allLines = <allLines>");
 	str allLinesTogether = intercalate("\n", allLines);
 	// this will contain the keys of allLines list which are duplicate lines.
 	set[int] duplicateLines = {};
 	for (startLine <- [0..(size(allLines)-duplicationBlock)]) {
 		str searchString = intercalate("\n", slice(allLines, startLine, duplicationBlock));
 		if (size(findAll(allLinesTogether, searchString)) > 1) {
+			//println("DUPES = <searchString>");
 			duplicateLines += toSet([startLine..(startLine+duplicationBlock)]);
 		}
 	}
+	
+	dupelines = [ allLines[x] | x <- duplicateLines];
+	println("all duplicate lines: <dupelines>");
+	
 	num totalLines = size(allLines);
-	//println("total lines: <totalLines>");
+	println("total lines: <totalLines>");
 	num totalDupes = size(toList(duplicateLines));
-	//println("total dupes: <totalDupes>");
+	println("total dupes: <totalDupes>");
+	
+	num percDupes = (totalDupes / totalLines) * 100;
+	println("debug: precentage dupes: <percDupes>");
+	
+	return percDupes;
+}
+
+public num getPrecentageOfDuplication(loc project) {
+	set[int] duplicateLines = {};
+	
+	list[str] allLines = ([] | it + (linesOfFile(f)) | loc f <- sourceFilesForProject(project));
+	for (startLine <- [0..(size(allLines)-duplicationBlock)]) {
+		str searchString = intercalate("\n", slice(allLines, startLine, duplicationBlock));
+		if (size(findAll(allLinesTogether, searchString)) > 1) {
+			//println("DUPES = <searchString>");
+			duplicateLines += toSet([startLine..(startLine+duplicationBlock)]);
+		}
+	}
+	
+	dupelines = [ allLines[x] | x <- duplicateLines];
+	println("all duplicate lines: <dupelines>");
+	
+	num totalLines = size(allLines);
+	println("total lines: <totalLines>");
+	num totalDupes = size(toList(duplicateLines));
+	println("total dupes: <totalDupes>");
 	
 	num percDupes = (totalDupes / totalLines) * 100;
 	println("debug: precentage dupes: <percDupes>");

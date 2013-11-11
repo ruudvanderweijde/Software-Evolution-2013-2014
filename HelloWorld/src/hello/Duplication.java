@@ -36,8 +36,9 @@ public class Duplication {
 	int duplication(int arr[], int left, int right)
 	{
 	      int i = left, j = right;
-	      int tmp;
+	      int tmp; /* comment in duplicate code */
 	      int pivot = arr[(left + right) / 2];
+	      // this is still duplicate
 	     
 	      while (i <= j) {
 	            while (arr[i] < pivot)
@@ -51,6 +52,19 @@ public class Duplication {
 	                  i++;
 	                  j--;
 	            }
+	      };
+	     
+	      return i;
+	}
+	
+	int duplication2(int arr[], int left, int right)
+	{
+	      int i = left, j = right;
+	      int tmp2;
+	      int pivot = arr[(left + right) / 2];
+
+	      while (i <= j) {
+	    	 	String dummy = "no duplicate code, because it is only 5 lines";
 	      };
 	     
 	      return i;

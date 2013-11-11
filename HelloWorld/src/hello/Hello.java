@@ -1,7 +1,8 @@
 package hello;
 
 public abstract class Hello {
-
+	String killMultilineStart = " /* ";
+	String killMultilineEnd = " */ ";
 	public Hello() {
 		// TODO Auto-generated constructor stub
 	}

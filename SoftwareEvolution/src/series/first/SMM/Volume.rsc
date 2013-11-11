@@ -32,7 +32,8 @@ public list[str] linesOfFile(loc file) {
 }
 
 private str stripMultiLineComments(str fileString) {
-	for (/<commentML:\/\*(?s).*?\*\/>/ := fileString) {
+	// match /* to */, but /* must not be between strings, like String = " /* ";
+	for (/<commentML:(?=(?:[^"\\]*(?:\\.|"(?:[^"\\]*\\.)*[^"\\]*"))*[^"]*$)\/\*(?s).*?\*\/>/ := fileString) {
 		if (/\n/ := commentML) {
 			// if the comment contains new lines, replace it with a new line
 			fileString = replaceFirst(fileString, commentML, "\n");

@@ -10,12 +10,12 @@ import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
 
 public int getScoreOfUnitSize(loc project) {
-	map[loc, int] sizes = getUnitSizePerFile(project);
-	
-	int total = size(sizes);
-	int veryHigh = size((x : sizes[x] | x <- sizes, sizes[x] > 100));
-	int high = size((x : sizes[x] | x <- sizes, sizes[x] <= 100, sizes[x] > 50 ));
-	int medium = size((x : sizes[x] | x <- sizes, sizes[x] <= 50, sizes[x] > 10 ));
+	map[loc, num] sizes = getUnitSizePerMethod(project);
+	iprintln("sizes = <sizes>");
+	num total = size(sizes);
+	num veryHigh = size((x : sizes[x] | x <- sizes, sizes[x] > 100));
+	num high = size((x : sizes[x] | x <- sizes, sizes[x] <= 100, sizes[x] > 50 ));
+	num medium = size((x : sizes[x] | x <- sizes, sizes[x] <= 50, sizes[x] > 10 ));
 	
 	num percVeryHigh 	= (veryHigh 	/ total) * 100;
 	num percHigh 		= (high 		/ total) * 100;
@@ -33,7 +33,7 @@ public int getScoreOfUnitSize(loc project) {
 	else 															  return -2;
 }
 
-public map[loc, int] getUnitSizePerFile(project) {
+public map[loc, num] getUnitSizePerMethod(project) {
 	return (method:size(linesOfFile(method)) | method <- methods(createM3FromEclipseProject(project)));
 }
 
