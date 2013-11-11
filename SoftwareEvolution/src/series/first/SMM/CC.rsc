@@ -36,6 +36,16 @@ public void printMap(map[str, int] mapPar) {
 	}
 }
 
+public void printComplexityMap(map[loc, tuple [num , int ]] mapPar) {
+//[k | k <- m ] gives a list of keys and
+//[ m[k] | K <- m ] gives a list of values. 
+	for (loc l <- [k | k <- mapPar] ) 
+		{ println ("For method: <l> lines of code: <mapPar[l]>  "); 	
+	}
+}
+
+
+
 
 public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 	methodAST = getMethodASTEclipse(methodName, model = myModel);
@@ -62,7 +72,7 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 		case \conditional(_,_,_) : stmtMap["SHORTCUT_IF"] += 1; 
 		// What do we do with the "THROWS"? 
 	}
-	printMap(stmtMap);		
+	//printMap(stmtMap);		
 	int totalDecisionPoints = (0 | it + stmtMap[k] | k <- stmtMap ) ;
 	println("Total decision points for method <methodName> method is : <totalDecisionPoints>");
 	return totalDecisionPoints;
@@ -73,13 +83,15 @@ public void printStuff() {
 	loc sui = |project://CodeAnalysisExamples|;
 	myModel = createM3FromEclipseProject(|project://CodeAnalysisExamples|);
 	myMethods = methods(myModel);  
-	map [loc, num] = getUnitSizePerMethod(); 
-	//map [loc, tuple[int linesOfCode, int cyclometicComplexity]] complexityMap = 
-									//(|java+method:///|:<0,0>);
+	map [loc, num] methodSizeMap = getUnitSizePerMethod(sui); 
+	map [loc, tuple[num linesOfCode, int cyclometicComplexity]] complexityMap = 
+									(|java+method:///|:<0,0>);
 	int methodCycComplexity = 0;
-	int methodLength = 0;
+	num methodLength = 0;
 	for (methodLoc <- myMethods) { 
 		methodCycComplexity = cyclometicComplexityPerMethod(methodLoc, myModel);
-		complexityMap += (methodLoc:<methodCycComplexity,methodLength>);
+		methodLength = methodSizeMap[methodLoc];
+		complexityMap += (methodLoc:<methodLength, methodCycComplexity>);
 	}
+	printComplexityMap(complexityMap);
 }
