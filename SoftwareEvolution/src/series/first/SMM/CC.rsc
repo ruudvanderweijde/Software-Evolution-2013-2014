@@ -9,7 +9,7 @@ import List;
 import series::first::SMM::UnitSize;
 
 public map[str,int] initializeStmtMap() {
-	map[str, int] mapPar = ("" : 0);
+	map[str, int] mapPar = ();
 	mapPar += ("RETURN": 0);
 	mapPar += ("IF": 0);
 	mapPar += ("IF_ELSE": 0);	
@@ -28,19 +28,15 @@ public map[str,int] initializeStmtMap() {
 	return mapPar; 
 }
 
-public void printMap(map[str, int] mapPar) {
-//[k | k <- m ] gives a list of keys and
-//[ m[k] | K <- m ] gives a list of values. 
+public void printStmtsMap(map[str, int] mapPar) {
 	for (str s <- [k | k <- mapPar] ) 
 		{ println ("Number of <s> statements is: <mapPar[s]>"); 	
 	}
 }
 
 public void printComplexityMap(map[loc, tuple [num , int ]] mapPar) {
-//[k | k <- m ] gives a list of keys and
-//[ m[k] | K <- m ] gives a list of values. 
 	for (loc l <- [k | k <- mapPar] ) 
-		{ println ("For method: <l> lines of code: <mapPar[l]>  "); 	
+		{ println ("For method: <l> lines of code and CC are: <mapPar[l]>  "); 	
 	}
 }
 
@@ -79,13 +75,24 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 }
 
 
+public str ccRiskMapping(int cycComplexity) {
+	map[str mRiskStr, list[int] mRiskRange] ccRiskMap = ("SIMPLE":[1..11], "MODERATE":[11..21], 
+									"HIGH":[21..51], "VERY HIGH":[51..100000]);
+	list[str] resultList = 
+			[riskStr | riskStr <- ccRiskMap, cycComplexity in ccRiskMap[riskStr]]; 
+	println("The risk for cc value: <cycComplexity> is: <resultList[0]>");
+	return resultList[0];
+}
+
+
+
 public void printStuff() {
 	loc sui = |project://CodeAnalysisExamples|;
 	myModel = createM3FromEclipseProject(|project://CodeAnalysisExamples|);
 	myMethods = methods(myModel);  
 	map [loc, num] methodSizeMap = getUnitSizePerMethod(sui); 
 	map [loc, tuple[num linesOfCode, int cyclometicComplexity]] complexityMap = 
-									(|java+method:///|:<0,0>);
+									();
 	int methodCycComplexity = 0;
 	num methodLength = 0;
 	for (methodLoc <- myMethods) { 
