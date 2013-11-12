@@ -25,6 +25,9 @@ public class Duplication100 {
 		int u;
 		int v;
 		int w;
+		int x;
+		int y;
+		int z;
 	}
 	public void Dummy2 () {
 		int a;
@@ -50,6 +53,9 @@ public class Duplication100 {
 		int u;
 		int v;
 		int w;
+		int x;
+		int y;
+		int z;
 	}
 	public void Dummy3 () {
 		int a;
@@ -75,6 +81,9 @@ public class Duplication100 {
 		int u;
 		int v;
 		int w;
+		int x;
+		int y;
+		int z;
 	}
 	public void Dummy4 () {
 		int a;
@@ -100,5 +109,8 @@ public class Duplication100 {
 //		int u;
 //		int v;
 //		int w;
+//		int x;
+//		int y;
+//		int z;
 	}
 }

@@ -72,6 +72,7 @@ public class Duplication34 {
 		return i;
 	}
 
+	/* this function contains no duplication */
 	int duplicationTestFunction(int arr[], int left, int right) {
 		int i = left, j = right;
 		System.out.println("This");
@@ -94,9 +95,8 @@ public class Duplication34 {
 				j--;
 				System.out.println("code.");
 			}
+			System.out.println("!");
 		}
-		;
-
 		return i;
 	}
 }
