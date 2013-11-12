@@ -8,8 +8,13 @@ import Map;
 import List;
 import series::first::SMM::UnitSize;
 
+str SIMPLE = "SIMPLE";
+str MODERATE = "MODERATE";
+str HIGH = "HIGH";
+str VERY_HIGH = "VERY HIGH";
+
 public map[str,int] initializeStmtMap() {
-	map[str, int] mapPar = ("" : 0);
+	map[str, int] mapPar = ();
 	mapPar += ("RETURN": 0);
 	mapPar += ("IF": 0);
 	mapPar += ("IF_ELSE": 0);	
@@ -28,13 +33,19 @@ public map[str,int] initializeStmtMap() {
 	return mapPar; 
 }
 
-public void printMap(map[str, int] mapPar) {
-//[k | k <- m ] gives a list of keys and
-//[ m[k] | K <- m ] gives a list of values. 
+public void printStmtsMap(map[str, int] mapPar) {
 	for (str s <- [k | k <- mapPar] ) 
 		{ println ("Number of <s> statements is: <mapPar[s]>"); 	
 	}
 }
+
+public void printComplexityMap(map[loc, tuple [num , str ]] mapPar) {
+	for (loc l <- [k | k <- mapPar] ) 
+		{ println ("For method: <l> lines of code and CC are: <mapPar[l]>  "); 	
+	}
+}
+
+
 
 
 public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
@@ -62,24 +73,54 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 		case \conditional(_,_,_) : stmtMap["SHORTCUT_IF"] += 1; 
 		// What do we do with the "THROWS"? 
 	}
-	printMap(stmtMap);		
+	//printMap(stmtMap);		
 	int totalDecisionPoints = (0 | it + stmtMap[k] | k <- stmtMap ) ;
 	println("Total decision points for method <methodName> method is : <totalDecisionPoints>");
 	return totalDecisionPoints;
 }
 
 
+public str ccRiskMapping(int cycComplexity) {
+	map[str mRiskStr, list[int] mRiskRange] ccRiskMap = ("SIMPLE":[1..11], "MODERATE":[11..21], 
+									"HIGH":[21..51], "VERY HIGH":[51..100000]);
+	list[str] resultList = 
+			[riskStr | riskStr <- ccRiskMap, cycComplexity in ccRiskMap[riskStr]]; 
+	println("The risk for cc value: <cycComplexity> is: <resultList[0]>");
+	return resultList[0];
+}
+	
+	
+public map [str, num] buildTotals(map [loc methodName, tuple[num lines , str riskStr ]] mapPar) {
+	map [str, num] resultMap = ();
+	int simpleTotal = sum([methodPar.lines | methodPar <- mapPar, methodPar.riskStr == SIMPLE]);
+	int moderateTotal = sum([methodPar.lines | methodPar <- mapPar, methodPar.riskStr == MODERATE]);
+	int highTotal = sum([methodPar.lines | methodPar <- mapPar, methodPar.riskStr == HIGH]);
+	int veryHighTotal = sum([methodPar.lines | methodPar <- mapPar, methodPar.riskStr == VERY_HIGH]);
+	resultMap += (SIMPLE:simpleTotal);
+	resultMap += (MODERATE:modarateTotal);
+	resultMap += (HIGH:highTotal);
+	resultMap += (VERY_HIGH:veryHighTotal);
+	return resultMap;	
+}
+
+
+
 public void printStuff() {
 	loc sui = |project://CodeAnalysisExamples|;
 	myModel = createM3FromEclipseProject(|project://CodeAnalysisExamples|);
 	myMethods = methods(myModel);  
-	map [loc, num] = getUnitSizePerMethod(); 
-	//map [loc, tuple[int linesOfCode, int cyclometicComplexity]] complexityMap = 
-									//(|java+method:///|:<0,0>);
+	map [loc, num] methodSizeMap = getUnitSizePerMethod(sui); 
+	map [loc, tuple[num linesOfCode, str riskStr]] complexityMap = ();
 	int methodCycComplexity = 0;
-	int methodLength = 0;
+	num methodLength = 0;
+	str cycCompRisk = " ";
 	for (methodLoc <- myMethods) { 
+		methodLength = methodSizeMap[methodLoc];
 		methodCycComplexity = cyclometicComplexityPerMethod(methodLoc, myModel);
-		complexityMap += (methodLoc:<methodCycComplexity,methodLength>);
+		cycCompRisk = ccRiskMapping(methodCycComplexity);
+		complexityMap += (methodLoc:<methodLength, cycCompRisk>);
 	}
+	printComplexityMap(complexityMap);
+	map [str, num] totalsMap = buildTotals(complexityMap);
+	map [str, num] percentagesMap = calculatePercentages(totalsMap, totalLinesOfCode);
 }

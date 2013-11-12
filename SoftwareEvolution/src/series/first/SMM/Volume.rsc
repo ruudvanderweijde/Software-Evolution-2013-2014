@@ -5,8 +5,12 @@ import List;
 import String;
 import lang::java::jdt::Project;
 
+public int getLinesOfJava(loc project) {
+	return (0 | it + size(linesOfFile(f)) | loc f <- sourceFilesForProject(project));
+}
+
 public int getScoreOfVolume(loc project) {
-	int linesOfJava = (0 | it + size(linesOfFile(f)) | loc f <- sourceFilesForProject(project));
+	int linesOfJava = getLinesOfJava(project);
 	println("debug: linesOfJava: <linesOfJava>");
 	
 	if 		(linesOfJava < 66000)	return 2;
