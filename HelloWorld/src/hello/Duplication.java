@@ -57,14 +57,44 @@ public class Duplication {
 	      return i;
 	}
 	
-	int duplication2(int arr[], int left, int right)
+	int noDuplication(int arr[], int left, int right)
 	{
 	      int i = left, j = right;
 	      int tmp2;
 	      int pivot = arr[(left + right) / 2];
-
+	      System.out.println("extra to fore no litarel dupe");
 	      while (i <= j) {
 	    	 	String dummy = "no duplicate code, because it is only 5 lines";
+	    	  while (arr[i] < pivot)
+                  i++;
+	      };
+	     
+	      return i;
+	}
+	
+	int duplicationTestFunction(int arr[], int left, int right)
+	{
+	      int i = left, j = right;
+	      System.out.println("This");
+	      int tmp;
+	      int pivot = arr[(left + right) / 2];
+
+	      System.out.println("is");
+	      while (i <= j) {
+	            while (arr[i] < pivot)
+	                  i++;
+	            while (arr[j] > pivot)
+	                  j--;
+	  	      		  System.out.println("no");
+	            if (i <= j) {
+	                  tmp = arr[i];
+	                  arr[i] = arr[j];
+	        	      System.out.println("duplicate");
+	        	      arr[j] = tmp;
+	                  i++;
+	                  j--;
+	        	      System.out.println("code.");
+	            }
 	      };
 	     
 	      return i;
