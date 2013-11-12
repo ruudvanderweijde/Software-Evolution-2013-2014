@@ -76,7 +76,7 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 myModel) {
 		// What do we do with the "THROWS"? 
 	}
 	//printMap(stmtMap);		
-	int totalDecisionPoints = (0 | it + stmtMap[k] | k <- stmtMap ) ;
+	int totalDecisionPoints = (1 | it + stmtMap[k] | k <- stmtMap ) ;
 	println("Total decision points for method <methodName> method is : <totalDecisionPoints>");
 	return totalDecisionPoints;
 }
@@ -113,9 +113,8 @@ map [str, num] calculatePercentages(map [str riskStr, num methodLines] totalsMap
 }
 
 
-public void printStuff() {
-	loc sui = |project://CodeAnalysisExamples|;
-	myModel = createM3FromEclipseProject(|project://CodeAnalysisExamples|);
+public void printStuff(loc sui) {
+	myModel = createM3FromEclipseProject(sui);
 	myMethods = methods(myModel);  
 	map [loc, num] methodSizeMap = getUnitSizePerMethod(sui); 
 	map [loc, tuple[num linesOfCode, str riskStr]] complexityMap = ();
@@ -134,4 +133,19 @@ public void printStuff() {
 	map [str, num] percentagesMap = calculatePercentages(totalsMap, totalLinesOfCode);
 	println("<percentagesMap>");
 	println("Total lines of code: <totalLinesOfCode>");
+	int finalComplexityScore = getScoreFromMatrix(percentagesMap[MODERATE], percentagesMap[HIGH], percentagesMap[VERY_HIGH]);
+	println("Score for this project is: <finalComplexityScore>");
 }
+
+
+public void runTest1() {
+	printStuff(|project://CodeAnalysisExamples|);	
+}
+
+public void runTest2() {
+	printStuff(|project://SmallSQL|);	
+}
+
+
+
+
