@@ -19,3 +19,8 @@ int: 168926
 Links on the SIG model:
 http://docs.codehaus.org/display/SONAR/SIG+Maintainability+Model+Plugin (this includes a sonar(?)plugin and a metric for unit size)
 http://homepages.cwi.nl/~paulk/thesesMasterSoftwareEngineering/2008/FrankOppedijk.pdf (Master thesis: Comparison of the SIG Maintainability Model and the Maintainability Index)
+
+
+Profiling in command line:
+
+"set profiling true"
