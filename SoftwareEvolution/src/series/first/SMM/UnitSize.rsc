@@ -3,11 +3,21 @@ module series::first::SMM::UnitSize
 import IO;
 import List;
 import Map;
+import util::Math;
 
 import series::first::SMM;
 import series::first::SMM::Volume;
 import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
+
+public int getScoreFromMatrix(num percVeryHigh, num percHigh, num percMedium) {
+	//based on information of http://docs.codehaus.org/display/SONAR/SIG+Maintainability+Model+Plugin
+	if 		(percMedium <= 25 && percHigh <= 0  && percVeryHigh <= 0) return 2;
+	else if (percMedium <= 30 && percHigh <= 5  && percVeryHigh <= 0) return 1;
+	else if (percMedium <= 40 && percHigh <= 10 && percVeryHigh <= 0) return 0;
+	else if (percMedium <= 50 && percHigh <= 15 && percVeryHigh <= 5) return -1;
+	else 															  return -2;
+}
 
 public int getScoreOfUnitSize(loc project) {
 	map[loc, num] sizes = getUnitSizePerMethod(project);
@@ -17,20 +27,15 @@ public int getScoreOfUnitSize(loc project) {
 	num high = size((x : sizes[x] | x <- sizes, sizes[x] <= 100, sizes[x] > 50 ));
 	num medium = size((x : sizes[x] | x <- sizes, sizes[x] <= 50, sizes[x] > 10 ));
 	
-	num percVeryHigh 	= (veryHigh 	/ total) * 100;
-	num percHigh 		= (high 		/ total) * 100;
-	num percMedium		= (medium		/ total) * 100;
+	num percVeryHigh 	= round(veryHigh 	/ total) * 100;
+	num percHigh 		= round(high 		/ total) * 100;
+	num percMedium		= round(medium		/ total) * 100;
 	
 	println("debug: percVeryHigh = <percVeryHigh>");
 	println("debug: percHigh = <percHigh>");
 	println("debug: percMedium = <percMedium>");
 	
-	//based on information of http://docs.codehaus.org/display/SONAR/SIG+Maintainability+Model+Plugin
-	if 		(percMedium <= 25 && percHigh <= 0  && percVeryHigh <= 0) return 2;
-	else if (percMedium <= 30 && percHigh <= 5  && percVeryHigh <= 0) return 1;
-	else if (percMedium <= 40 && percHigh <= 10 && percVeryHigh <= 0) return 0;
-	else if (percMedium <= 50 && percHigh <= 15 && percVeryHigh <= 5) return -1;
-	else 															  return -2;
+	return getScoreFromMatrix(percVeryHigh, percHigh, percMedium);
 }
 
 public map[loc, num] getUnitSizePerMethod(project) {

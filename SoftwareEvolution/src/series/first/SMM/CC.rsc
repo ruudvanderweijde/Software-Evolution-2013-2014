@@ -7,6 +7,8 @@ import IO;
 import Map;
 import List;
 import series::first::SMM::UnitSize;
+import series::first::SMM::Volume;
+
 
 str SIMPLE = "SIMPLE";
 str MODERATE = "MODERATE";
@@ -90,19 +92,25 @@ public str ccRiskMapping(int cycComplexity) {
 }
 	
 	
-public map [str, num] buildTotals(map [loc methodName, tuple[num lines , str riskStr ]] mapPar) {
+public map [str, num] buildTotals(map [loc methodName, tuple[num lines , str riskStr ] myTuple] mapPar) {
 	map [str, num] resultMap = ();
-	int simpleTotal = sum([methodPar.lines | methodPar <- mapPar, methodPar.riskStr == SIMPLE]);
-	int moderateTotal = sum([methodPar.lines | methodPar <- mapPar, methodPar.riskStr == MODERATE]);
-	int highTotal = sum([methodPar.lines | methodPar <- mapPar, methodPar.riskStr == HIGH]);
-	int veryHighTotal = sum([methodPar.lines | methodPar <- mapPar, methodPar.riskStr == VERY_HIGH]);
+	num simpleTotal = sum([mapPar[methodPar].lines | methodPar <- mapPar, mapPar[methodPar].riskStr == SIMPLE]);
+	num moderateTotal = sum([mapPar[methodPar].lines | methodPar <- mapPar, mapPar[methodPar].riskStr == MODERATE]);
+	num highTotal = sum([mapPar[methodPar].lines | methodPar <- mapPar, mapPar[methodPar].riskStr == HIGH]);
+	num veryHighTotal = sum([mapPar[methodPar].lines | methodPar <- mapPar, mapPar[methodPar].riskStr == VERY_HIGH]);
 	resultMap += (SIMPLE:simpleTotal);
-	resultMap += (MODERATE:modarateTotal);
+	resultMap += (MODERATE:moderateTotal);
 	resultMap += (HIGH:highTotal);
 	resultMap += (VERY_HIGH:veryHighTotal);
 	return resultMap;	
 }
 
+
+map [str, num] calculatePercentages(map [str riskStr, num methodLines] totalsMap, num totalLinesOfCode) {
+	map [str, num] percMap = ();
+	percMap = (totalsPar:((totalsMap[totalsPar])/totalLinesOfCode*100) | totalsPar <- totalsMap);
+	return percMap;
+}
 
 
 public void printStuff() {
@@ -122,5 +130,8 @@ public void printStuff() {
 	}
 	printComplexityMap(complexityMap);
 	map [str, num] totalsMap = buildTotals(complexityMap);
+	num totalLinesOfCode = getLinesOfJava(sui);
 	map [str, num] percentagesMap = calculatePercentages(totalsMap, totalLinesOfCode);
+	println("<percentagesMap>");
+	println("Total lines of code: <totalLinesOfCode>");
 }
