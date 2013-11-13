@@ -63,11 +63,11 @@ public void printMI (map[str, num] mapMI) {
 
 public str measureToString(int measure) {
 	switch (measure) {
-		case 2:  return "++";
-		case 1:  return "+";
-		case 0:  return "o";
-		case -1: return "-";
-		case -2: return "--";
+		case 5:  return "++";
+		case 4:  return "+";
+		case 3:  return "o";
+		case 2: return "-";
+		case 1: return "--";
 	}
 }
 
@@ -82,18 +82,18 @@ public void logMessage(str message, int level) {
 
 // example from the paper
 public map[str, int] pp1 = (	
-	"Volume" 		: 2,
-	"Complexity" 	: -2,
-	"Duplication"	: -1,
-	"UnitSize"		: -1,
-	"UnitTesting"	: 0
+	"Volume" 		: 5,
+	"Complexity" 	: 1,
+	"Duplication"	: 2,
+	"UnitSize"		: 2,
+	"UnitTesting"	: 3
 	);
 	
 public map[str, int] mi1 = (	
-	"analisability" : 0,
-	"changeability" : -1,
-	"stability"		: 0,
-	"testability"	: -1
+	"analisability" : 3,
+	"changeability" : 2,
+	"stability"		: 3,
+	"testability"	: 2
 	);
 	
 public test bool ppToMI1() = mi1 == productPropertiesToMaintainabilityIndex(pp1);

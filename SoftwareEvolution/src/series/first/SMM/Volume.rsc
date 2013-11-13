@@ -47,11 +47,11 @@ private str stripMultiLineComments(str fileString) {
 }
 
 private int getScoreForLines(int linesOfJava) {
-	if 		(linesOfJava < 66000)	return 2;
-	else if (linesOfJava < 246000)	return 1;
-	else if (linesOfJava < 665000)	return 0;
-	else if (linesOfJava < 1310000)	return -1;
-	else 							return -2;
+	if 		(linesOfJava < 66000)	return 5;
+	else if (linesOfJava < 246000)	return 4;
+	else if (linesOfJava < 665000)	return 3;
+	else if (linesOfJava < 1310000)	return 2;
+	else 							return 1;
 }
 
 private loc testFile0 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/EmptyClass.java|;

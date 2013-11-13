@@ -24,11 +24,11 @@ public int getScoreOfDuplication(loc project) {
 }
 
 private int getScore(num percentage) {
-	if 		(percentage <= 3)	return 2;
-	else if (percentage <= 5)	return 1;
-	else if (percentage <= 10)	return 0;
-	else if (percentage <= 20)	return -1;
-	else 						return -2;	
+	if 		(percentage <= 3)	return 5;
+	else if (percentage <= 5)	return 4;
+	else if (percentage <= 10)	return 3;
+	else if (percentage <= 20)	return 2;
+	else 						return 1;	
 }
 private num getPrecentageOfDuplication(loc project) {
 	// method matching strings is faster then matching lists;

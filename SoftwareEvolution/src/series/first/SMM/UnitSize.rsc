@@ -12,11 +12,11 @@ import lang::java::jdt::m3::Core;
 
 public int getScoreFromMatrix(num percVeryHigh, num percHigh, num percMedium) {
 	//based on information of http://docs.codehaus.org/display/SONAR/SIG+Maintainability+Model+Plugin
-	if 		(percMedium <= 25 && percHigh <= 0  && percVeryHigh <= 0) return 2;
-	else if (percMedium <= 30 && percHigh <= 5  && percVeryHigh <= 0) return 1;
-	else if (percMedium <= 40 && percHigh <= 10 && percVeryHigh <= 0) return 0;
-	else if (percMedium <= 50 && percHigh <= 15 && percVeryHigh <= 5) return -1;
-	else 															  return -2;
+	if 		(percMedium <= 25 && percHigh <= 0  && percVeryHigh <= 0) return 5;
+	else if (percMedium <= 30 && percHigh <= 5  && percVeryHigh <= 0) return 4;
+	else if (percMedium <= 40 && percHigh <= 10 && percVeryHigh <= 0) return 3;
+	else if (percMedium <= 50 && percHigh <= 15 && percVeryHigh <= 5) return 2;
+	else 															  return 1;
 }
 
 public int getScoreOfUnitSize(loc project) {
