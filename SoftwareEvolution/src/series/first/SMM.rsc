@@ -3,13 +3,14 @@ module series::first::SMM
 
 import IO;
 import List;
+import DateTime;
 import util::Math;
 
 import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
 
 import series::first::SMM::Volume;
-import series::first::SMM::Complexity;
+import series::first::SMM::CC;
 import series::first::SMM::Duplication;
 import series::first::SMM::UnitSize;
 import series::first::SMM::UnitTesting;
@@ -19,24 +20,23 @@ public loc project1 = |project://hsqldb-2.3.1|;
 // test project
 public loc project2 = |project://HelloWorld|;
 
+@logLevel {
+	Log level 0 => no logging;
+	Log level 1 => main logging;
+	Log level 2 => debug logging;
+}
+private int logLevel = 1;
+
 public void displayIndex(loc project) {
 	map[str, num] pp = getProductProperties(project);
-	println("-----------------------------------");
+	logMessage("Product properties:", 1);
 	printMI(pp);
-	println("-----------------------------------");
 	map[str, num] mi = productPropertiesToMaintainabilityIndex(pp);
+	logMessage("Maintainability index:", 1);
 	printMI(mi);
 }
 
 public map[str, num] productPropertiesToMaintainabilityIndex(map[str, num] pp) {
-	println("analisability : (<pp["Volume"]> + <pp["Duplication"]> + <pp["UnitSize"]> + <pp["UnitTesting"]>) / 4");
-	println("Res: <(pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4>");
-	println("changeability : (<pp["Complexity"]> + <pp["Duplication"]>) / 2,");
-	println("Res: <(pp["Complexity"] + pp["Duplication"]) / 2>");
-	println("stability		: (<pp["UnitTesting"]>),");
-	println("Res: <(pp["UnitTesting"])>");
-	println("testability	: (<pp["Complexity"]> + <pp["UnitSize"]> + <pp["UnitTesting"]>) / 3");
-	println("Res: <(pp["Complexity"] + pp["UnitSize"] + pp["UnitTesting"]) / 3>");
 	return (
 		"analisability" : round((pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4),
 		"changeability" : round((pp["Complexity"] + pp["Duplication"]) / 2),
@@ -52,7 +52,7 @@ public map[str, num] getProductProperties(loc project) {
 		"Duplication"	: getScoreOfDuplication(project),
 		"UnitSize"		: getScoreOfUnitSize(project),
 		"UnitTesting"	: getScoreOfUnitTesting(project)
-	);	
+	);
 }
 
 public void printMI (map[str, num] mapMI) {
@@ -70,6 +70,15 @@ public str measureToString(int measure) {
 		case -2: return "--";
 	}
 }
+
+public void logMessage(str message, int level) {
+	if (level <= logLevel) {
+		str date = printDate(now(), "Y-MM-dd HH:mm:ss");
+		println("<date> :: <message>");
+	}
+}
+
+/* test functions */
 
 // example from the paper
 public map[str, int] pp1 = (	

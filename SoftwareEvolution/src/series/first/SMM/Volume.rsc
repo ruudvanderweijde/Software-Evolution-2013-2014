@@ -3,6 +3,7 @@ module series::first::SMM::Volume
 import IO;
 import List;
 import String;
+import series::first::SMM;
 import lang::java::jdt::Project;
 
 public int getLinesOfJava(loc project) {
@@ -10,16 +11,13 @@ public int getLinesOfJava(loc project) {
 }
 
 public int getScoreOfVolume(loc project) {
+	logMessage("Calculating lines of code...", 1);
 	int linesOfJava = getLinesOfJava(project);
-	println("debug: linesOfJava: <linesOfJava>");
-	
-	if 		(linesOfJava < 66000)	return 2;
-	else if (linesOfJava < 246000)	return 1;
-	else if (linesOfJava < 665000)	return 0;
-	else if (linesOfJava < 1310000)	return -1;
-	else 							return -2;
+	int score = getScoreForLines(linesOfJava);
+	logMessage("-- Result: <linesOfJava> lines of code found. Score: <score>", 1);
+	return score;
 }
-	
+
 public list[str] linesOfFile(loc file) {
 	return 
 		for (line <- split("\n", stripMultiLineComments(readFile(file)))) {
@@ -46,6 +44,14 @@ private str stripMultiLineComments(str fileString) {
 		}
 	}
 	return fileString;
+}
+
+private int getScoreForLines(int linesOfJava) {
+	if 		(linesOfJava < 66000)	return 2;
+	else if (linesOfJava < 246000)	return 1;
+	else if (linesOfJava < 665000)	return 0;
+	else if (linesOfJava < 1310000)	return -1;
+	else 							return -2;
 }
 
 private loc testFile0 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/EmptyClass.java|;

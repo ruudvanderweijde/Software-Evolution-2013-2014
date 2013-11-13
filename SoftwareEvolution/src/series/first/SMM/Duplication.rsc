@@ -8,62 +8,59 @@ import Map;
 import Relation;
 import util::Math;
 
+import series::first::SMM;
 import series::first::SMM::Volume;
 import lang::java::jdt::Project;
 
 private int duplicationBlock = 6;
 
 public int getScoreOfDuplication(loc project) {
-	num percDuplicateLines = getPrecentageOfDuplication(project);
-	
-	if 		(percDuplicateLines <= 3)	return 2;
-	else if (percDuplicateLines <= 5)	return 1;
-	else if (percDuplicateLines <= 10)	return 0;
-	else if (percDuplicateLines <= 20)	return -1;
-	else 								return -2;	
+	logMessage("Calculating duplicate lines...", 1);
+	num percentage = getPrecentageOfDuplication(project);
+	int score = getScore(percentage);
+	logMessage("-- Result <percentage>% of duplicate code found. Score: <score>.", 1);
+	return score;
+
 }
 
-public num getPrecentageOfDuplication(loc project) {
+private int getScore(num percentage) {
+	if 		(percentage <= 3)	return 2;
+	else if (percentage <= 5)	return 1;
+	else if (percentage <= 10)	return 0;
+	else if (percentage <= 20)	return -1;
+	else 						return -2;	
+}
+private num getPrecentageOfDuplication(loc project) {
 	// method matching strings is faster then matching lists;
-	tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatching(project);
-	//tuple[num allLines, num dupeLines] result = getDuplicationUsingListMatching(project);
+	tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatching(sourceFilesForProject(project));
+	//tuple[num allLines, num dupeLines] result = getDuplicationUsingListMatching(sourceFilesForProject(project));
 		
-	println("debug: total lines: <result.totalLines>");
-	println("debug: total dupes: <result.dupeLines>");
+	logMessage("debug: total lines: <result.totalLines>", 2);
+	logMessage("debug: total dupes: <result.dupeLines>", 2);
 	
-	num percDupes = round((result.dupeLines / result.totalLines) * 100);
-	println("debug: precentage dupes: <percDupes>");
-	
-	return percDupes;
+	return round((result.dupeLines / result.totalLines) * 100);
 }
 
-public tuple[num, num] getDuplicationUsingStringMatching(loc project) {
-	set[loc] files = isFile(project) ? {project} : sourceFilesForProject(project);
-	//println("files: <files>");
-	list[str] allLines = ([] | it + [ trim(line) | line <- linesOfFile(f) ] | loc f <- files);
-	//println("debug: allLines = <allLines>");
-	str allLinesTogether = intercalate("\n", allLines);
-	println("allLinesTogether = <allLinesTogether>");
-	// this will contain the keys of allLines list which are duplicate lines.
+private tuple[num, num] getDuplicationUsingStringMatching(set[loc] files) {
+	// this set will contain the keys of allLines list which are duplicate lines.
 	set[int] duplicateLines = {};
+	
+	list[str] allLines = ([] | it + [ trim(line) | line <- linesOfFile(f) ] | loc f <- files);
+	str allLinesTogether = intercalate("\n", allLines);
+	
 	for (startLine <- [0..(size(allLines)-duplicationBlock)]) {
 		str searchString = "\n" + intercalate("\n", slice(allLines, startLine, duplicationBlock));
 		if (size(findAll(allLinesTogether, searchString)) > 1) {
-			//println("debug: DUPES = <searchString>");
-			println(findAll(allLinesTogether, searchString));
-			//println("debug: match on total line: <startLine>");
-			//println("debug: match on string: <searchString>");
-			
+			// mark these items as duplicate lines		
 			duplicateLines += toSet([startLine..(startLine+duplicationBlock)]);
 		}
 	}
- 	println("debug: all duplicate lines: <[ allLines[x] | x <- duplicateLines]>");
+ 	//println("debug: all duplicate lines: <[ allLines[x] | x <- duplicateLines]>");
 	
-	tuple[num,num] result = <size(allLines),size(duplicateLines)>;
-	return result;
+	return <size(allLines),size(duplicateLines)>;
 }
 
-public tuple[num, num] getDuplicationUsingListMatching(loc project) {
+private tuple[num, num] getDuplicationUsingListMatching(set[loc] files) {
 	set[int] duplicateLines = {};
 	
 	int beginLine = 0;
@@ -72,9 +69,6 @@ public tuple[num, num] getDuplicationUsingListMatching(loc project) {
 	list[str] allLines = [];
 	map[loc, tuple[int beginLine, int endLine]] fileLineIndex = ();
 	// get all the code of the project
-	// edit: or just one files, used for testcases.
-	set[loc] files = isFile(project) ? {project} : sourceFilesForProject(project);
-	println("files: <files>");
 	for(f <- files) {
 		numberOfLines = size(linesOfFile(f));
 		fileLineIndex += (f:<beginLine,beginLine+numberOfLines-1>);
@@ -82,7 +76,6 @@ public tuple[num, num] getDuplicationUsingListMatching(loc project) {
 		// fill allLines to match parts of the data
 		allLines += [ trim(line) | line <- linesOfFile(f) ];
 	}
-	println("debug: allLines = <allLines>");
 	
 	for (startLine <- [0..(size(allLines)-duplicationBlock)]) {
 		list[str] possibleDuplicationBlock = slice(allLines, startLine, duplicationBlock);
@@ -91,22 +84,9 @@ public tuple[num, num] getDuplicationUsingListMatching(loc project) {
 			duplicateLines += toSet([startLine..(startLine+duplicationBlock)]);
 		}
 	}
-	println("debug: all duplicate lines: <[ allLines[x] | x <- duplicateLines]>");
+	//println("debug: all duplicate lines: <[ allLines[x] | x <- duplicateLines]>");
 	
-	
-	tuple[num,num] result = <size(allLines),size(duplicateLines)>;
-	return result;
-}
-
-// this method is not used anymore. It replaces whitespace.
-private list[str] trimWhiteSpace(list[str] listOfLines) {
-	return 
-		for(line <- listOfLines) {
-			for (/<whitespace:\s\s+>/ := line) {
-				line = replaceFirst(line, whitespace, " ");
-			}
-			append trim(line);
-		}
+	return <size(allLines),size(duplicateLines)>;
 }
 
 public bool testBothVersions(loc file) {
@@ -119,14 +99,14 @@ public loc testDupe3 = |project://SoftwareEvolution/src/test/series/first/SMM/Du
 public loc testDupe4 = |project://SoftwareEvolution/src/test/series/first/SMM/Duplication/Duplication100.java|;
 
 
-public test bool compareFunctions0() = testBothVersions(testDupe0);
-public test bool compareFunctions1() = testBothVersions(testDupe1);
-public test bool compareFunctions2() = testBothVersions(testDupe2);
-public test bool compareFunctions3() = testBothVersions(testDupe3);
-public test bool compareFunctions4() = testBothVersions(testDupe4);
+public test bool compareFunctions0() = testBothVersions({testDupe0});
+public test bool compareFunctions1() = testBothVersions({testDupe1});
+public test bool compareFunctions2() = testBothVersions({testDupe2});
+public test bool compareFunctions3() = testBothVersions({testDupe3});
+public test bool compareFunctions4() = testBothVersions({testDupe4});
 
-public test bool dupesInFile0() = <_, dupes> := getDuplicationUsingStringMatching(testDupe0) && dupes == 0;
-public test bool dupesInFile1() = <_, dupes> := getDuplicationUsingStringMatching(testDupe1) && dupes == 0;
-public test bool dupesInFile2() = <_, dupes> := getDuplicationUsingStringMatching(testDupe2) && dupes == 12;
-public test bool dupesInFile3() = <_, dupes> := getDuplicationUsingStringMatching(testDupe3) && dupes == 38;
-public test bool dupesInFile4() = <_, dupes> := getDuplicationUsingStringMatching(testDupe4) && dupes == 100;
+public test bool dupesInFile0() = <_, dupes> := getDuplicationUsingStringMatching({testDupe0}) && dupes == 0;
+public test bool dupesInFile1() = <_, dupes> := getDuplicationUsingStringMatching({testDupe1}) && dupes == 0;
+public test bool dupesInFile2() = <_, dupes> := getDuplicationUsingStringMatching({testDupe2}) && dupes == 12;
+public test bool dupesInFile3() = <_, dupes> := getDuplicationUsingStringMatching({testDupe3}) && dupes == 38;
+public test bool dupesInFile4() = <_, dupes> := getDuplicationUsingStringMatching({testDupe4}) && dupes == 100;

@@ -20,8 +20,9 @@ public int getScoreFromMatrix(num percVeryHigh, num percHigh, num percMedium) {
 }
 
 public int getScoreOfUnitSize(loc project) {
+	logMessage("Calculating size per unit...", 1);
 	map[loc, num] sizes = getUnitSizePerMethod(project);
-	iprintln("sizes = <sizes>");
+	
 	num total = size(sizes);
 	num veryHigh = size((x : sizes[x] | x <- sizes, sizes[x] > 100));
 	num high = size((x : sizes[x] | x <- sizes, sizes[x] <= 100, sizes[x] > 50 ));
@@ -30,12 +31,21 @@ public int getScoreOfUnitSize(loc project) {
 	num percVeryHigh 	= round(veryHigh 	/ total) * 100;
 	num percHigh 		= round(high 		/ total) * 100;
 	num percMedium		= round(medium		/ total) * 100;
+
 	
-	println("debug: percVeryHigh = <percVeryHigh>");
-	println("debug: percHigh = <percHigh>");
-	println("debug: percMedium = <percMedium>");
+	/** debug information **/
+	logMessage("Very high: <veryHigh>.", 2);
+	logMessage("High: <high>.", 2);
+	logMessage("Medium: <medium>.", 2);
 	
-	return getScoreFromMatrix(percVeryHigh, percHigh, percMedium);
+	logMessage("Very high: <medium>%.", 2);
+	logMessage("High: <medium>%.", 2);
+	logMessage("Medium: <medium>%.", 2);
+	/** end of debug information **/
+	
+	int score = getScoreFromMatrix(percVeryHigh, percHigh, percMedium);
+	logMessage("-- Result: <total> methods initialized. Score: <score>.", 1);
+	return score;
 }
 
 public map[loc, num] getUnitSizePerMethod(project) {

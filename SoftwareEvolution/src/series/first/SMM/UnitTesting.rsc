@@ -2,10 +2,13 @@ module series::first::SMM::UnitTesting
 
 import IO;
 
+import series::first::SMM;
 import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
 
 public int getScoreOfUnitTesting(loc project) {
+	logMessage("Calculating unittest coverage...", 1);
+	logMessage("-- Result: xx methods initialized. Score: xx.", 1);
 	return 0;
 }
 
