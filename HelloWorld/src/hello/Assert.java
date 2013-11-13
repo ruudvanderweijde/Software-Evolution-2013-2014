@@ -5,6 +5,8 @@ public abstract class Assert {
 		assert(true==false||true);
 		assert true==false||true;
 		assert true==false||true : "message";
+//		assert true==false||true;
+//		assert true==false||true : "message";
 	}
 
 	public static void main(String[] args) {
