@@ -85,7 +85,7 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 projectModel) {
 		// What do we do with the "THROWS"? 
 	}
 	//printMap(stmtMap);		
-	int totalDecisionPoints = (1 | it + stmtMap[k] | k <- stmtMap ) ;
+	int totalDecisionPoints = (0 | it + stmtMap[k] | k <- stmtMap ) + 1 ;
 	logMessage("Total decision points for method <methodName> method is : <totalDecisionPoints>", 2);
 	return totalDecisionPoints;
 }
@@ -119,11 +119,11 @@ map [str, num] calculatePercentages(map [str riskStr, num methodLines] totalsMap
 }
 
 public void runTest1() {
-	printStuff(|project://CodeAnalysisExamples|);	
+	getScoreOfComplexity(|project://CodeAnalysisExamples|);	
 }
 
 public void runTest2() {
-	printStuff(|project://SmallSQL|);	
+	getScoreOfComplexity(|project://SmallSQL|);	
 }
 
 // print functions
@@ -134,3 +134,4 @@ public void printStmtsMap(map[str, int] stmtMap) {
 public void printComplexityMap(map[loc, tuple [num , str ]] stmtMap) {	 	
 	for (loc l <- stmtMap) logMessage("For method: <l> lines of code and CC are: <stmtMap[l]>", 2);
 }
+
