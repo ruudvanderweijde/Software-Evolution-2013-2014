@@ -19,6 +19,7 @@ public loc project0 = |project://smallsql0.21_src|;
 public loc project1 = |project://hsqldb-2.3.1|;
 // test project
 public loc project2 = |project://HelloWorld|;
+public loc project3 = |project://QL|;
 
 @logLevel {
 	Log level 0 => no logging;

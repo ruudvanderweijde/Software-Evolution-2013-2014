@@ -9,7 +9,7 @@ import lang::java::jdt::m3::Core;
 public int getScoreOfUnitTesting(loc project) {
 	logMessage("Calculating unittest coverage...", 1);
 	logMessage("-- Result: xx methods initialized. Score: xx.", 1);
-	return 0;
+	return 3;
 }
 
 public void getCoverage(loc project) {
