@@ -126,6 +126,11 @@ public void runTest2() {
 	getScoreOfComplexity(|project://SmallSQL|);	
 }
 
+public void runTest3() {
+	getScoreOfComplexity(|project://HSQLDB|);	
+}
+
+
 // print functions
 public void printStmtsMap(map[str, int] stmtMap) {	
 	for (str s <- stmtMap) logMessage("Number of <s> statements is: <stmtMap[s]>", 2);
