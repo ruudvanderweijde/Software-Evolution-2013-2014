@@ -1,0 +1,838 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- saved from url=(0042)http://localhost:9000/dashboard/index/8033 -->
+<html><script>navigator.CookiesOK="I explicitly accept all cookies";</script><script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="gwt:property" content="locale=nl">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<link rel="shortcut icon" type="image/x-icon" href="http://localhost:9000/images/favicon.ico?1383751212">
+
+<title>SonarQube - QL</title>
+
+<link href="./SonarQube - QL_files/sonar.css" media="all" rel="stylesheet" type="text/css"><script src="./SonarQube - QL_files/sonar.js" type="text/javascript"></script>
+<!--[if lte IE 8]><script src="/javascripts/protovis-msie.js?1383751212" type="text/javascript"></script><![endif]-->
+<script>var baseUrl = '';
+var $j = jQuery.noConflict();
+$j(document).ready(function () {$j('.open-modal').modal()});
+</script>
+<script>if(window.CookiesOK) window.CookiesOK("3.1.3");</script></head>
+<body style="">
+
+
+
+<div id="container">
+<div id="hd">
+<div id="nav-left">
+<ul>
+<li>
+<a href="http://localhost:9000/">Dashboards</a>
+</li>
+<script>
+if (supports_html5_storage()) {
+var sonarRecentHistory = new Sonar.RecentHistory();
+}
+</script>
+<li>
+<a href="http://localhost:9000/dashboard/index/8033#" onclick="if (sonarRecentHistory) { sonarRecentHistory.populateRecentHistoryPanel(); }; showDropdownMenu(&#39;projects-menu&#39;); return false;" class="link-more">Projects</a>
+<div id="projects-menu" class="dropdown-menu" style="max-width: none; display: none;">
+<div id="recent-history" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+<h2>Recent Projects</h2>
+<ul id="recent-history-list">
+</ul>
+</div>
+<div>
+<ul>
+
+<li><a href="http://localhost:9000/all_projects?qualifier=TRK">All Projects</a></li>
+
+</ul>
+</div>
+</div>
+</li>
+<script>
+if (sonarRecentHistory == null) {
+$j('#recent-history').detach();
+}
+
+else {
+sonarRecentHistory.add('ql',
+'QL',
+'/images/q/TRK.png');
+}
+
+</script>
+<li>
+<a href="http://localhost:9000/measures">Measures</a>
+</li>
+<li>
+<a href="http://localhost:9000/issues/index">Issues</a>
+</li>
+<li>
+<a href="http://localhost:9000/profiles">Quality Profiles</a>
+</li>
+</ul>
+</div>
+<div id="nav">
+<ul>
+<li>
+<input type="text" size="15" name="search" id="searchInput" onfocus="autocompleteResources()" value="Search">
+<img src="./SonarQube - QL_files/loading-small.gif" id="searchingResources" style="display:none">
+</li>
+
+<li><a href="http://localhost:9000/sessions/new?return_to=%2Fdashboard%2Findex%2F8033">Log in</a></li>
+
+
+</ul>
+</div>
+<div id="searchResourcesResults" class="autocomplete" style="display:none"></div>
+</div>
+
+
+<div id="crumbs">
+<ul id="crumbs-ops">
+
+<li>
+</li>
+
+
+</ul>
+<ul id="bc">
+
+
+<li>
+<img alt="" height="16" src="./SonarQube - QL_files/TRK.png" title="" width="16">&nbsp;
+<a href="http://localhost:9000/dashboard/index/ql">QL</a></li>
+
+</ul>
+</div>
+
+<div id="body">
+
+<div id="sidebar">
+<ul class="sidebar blue-sidebar">
+
+
+<li class="active">
+<a href="http://localhost:9000/dashboard/index/8033?did=1">Dashboard</a>
+</li>
+
+<li class="">
+<a href="http://localhost:9000/dashboard/index/8033?did=2">Hotspots</a>
+</li>
+
+<li class="">
+<a href="http://localhost:9000/dashboard/index/8033?did=3">Issues</a>
+</li>
+
+<li class="">
+<a href="http://localhost:9000/dashboard/index/8033?did=4">Time Machine</a>
+</li>
+
+
+<li class="spacer"></li>
+<li class="sidebar-title">Tools</li>
+<li class="">
+<a href="http://localhost:9000/components/index/8033">Components</a>
+</li>
+<li class="">
+<a href="http://localhost:9000/drilldown/issues/8033">Issues Drilldown</a>
+</li>
+
+<li class="">
+<a href="http://localhost:9000/plugins/resource/8033?page=org.sonar.plugins.design.ui.libraries.LibrariesPage">Libraries</a>
+</li>
+
+<li class="">
+<a href="http://localhost:9000/cloud/index/8033">Clouds</a>
+</li>
+
+<li class="">
+<a href="http://localhost:9000/comparison/index?resource=ql">Compare</a>
+</li>
+
+
+
+
+<li id="logo">
+<center><a href="http://www.sonarqube.org/" target="SonarSource"><img alt="Embrace Quality" height="24" src="./SonarQube - QL_files/sonarqube-24x100.png" title="Embrace Quality" width="100"></a></center>
+</li>
+</ul>
+</div>
+
+
+<div id="content" class="with_sidebar">
+
+<div class="print"><h2>QL</h2></div>
+
+<div class="error" id="error" style="display:none">
+<span id="errormsg"></span> &nbsp;&nbsp;[<a href="http://localhost:9000/dashboard/index/8033#" onclick="javascript:$j(&#39;#error&#39;).hide();return false;">hide</a>]
+</div>
+<div class="notice" id="info" style="display:none">
+<span id="infomsg"></span> &nbsp;&nbsp;[<a href="http://localhost:9000/dashboard/index/8033#" onclick="javascript:$j(&#39;#info&#39;).hide();return false;">hide</a>]
+</div>
+<div class="warning" id="warning" style="display:none">
+<span id="warningmsg"></span> &nbsp;&nbsp;[<a href="http://localhost:9000/dashboard/index/8033#" onclick="javascript:$j(&#39;#warning&#39;).hide();return false;">hide</a>]
+</div>
+<div id="dashboard">
+
+<div class="line-block">
+
+
+<div id="snapshot_title" class="page_title">
+<h4>
+Version 0.1 - don 14 nov 2013 17:49:34 CET
+
+
+<form method="GET" action="./SonarQube - QL_files/SonarQube - QL.htm" style="display: inline" class="spacer-left">
+<input type="hidden" name="did" value="1">
+<div class="select2-container" id="s2id_select-comparison" style="width: 230px">    <a href="http://localhost:9000/dashboard/index/8033#" onclick="return false;" class="select2-choice" tabindex="0">   <span>Time changes...</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a><div class="select2-drop select2-offscreen" style="display: block;">   <div class="select2-search select2-search-hidden">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results"></ul></div>    </div><select id="select-comparison" name="period" onchange="submit()" style="display: none;"><option selected="" value="0" class="small">Time changes...</option><option value="1" class="small">Δ since previous analysis (14/11/2013)</option><option value="2" class="small">Δ over 30 days</option></select><script>$j(document).ready(function() {$j('#select-comparison').select2({minimumResultsForSearch:215,allowClear:false,placeholder:'',width:'230px'});});</script></form>
+
+
+</h4>
+</div>
+
+</div>
+
+
+<div style="width: 100%;display: block; float: none">
+
+<!-- the right margin with 1px is a trick for IE. See SONAR-2637 -->
+<div class="dashboard-column-wrapper" style="width: 50%;margin: 0 -1px 0 0;">
+<div class="dashboard-column" id="dashboard-column-1" style="margin: 0 5px 0 0px;">
+
+
+
+<div class="block" id="block_1">
+
+<div class="size" style="height:100%;">
+
+<div class="widget">
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="48%" nowrap="">
+<div class="dashbox">
+
+<h3>Lines of code</h3>
+<p>
+<span class="big"><a href="http://localhost:9000/drilldown/measures/8033?metric=ncloc" class="" rel="" title=""><span id="m_ncloc">4.484</span></a></span>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+
+<p><a href="http://localhost:9000/drilldown/measures/8033?metric=lines" class="" rel="" title=""><span id="m_lines">5.833</span> lines</a> <img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+
+
+
+<p>
+<a href="http://localhost:9000/drilldown/measures/8033?metric=statements" class="" rel="" title=""><span id="m_statements">1.895</span> statements</a> <img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+
+
+<p><a href="http://localhost:9000/drilldown/measures/8033?metric=files" class="" rel="" title=""><span id="m_files">59</span> files</a> <img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+
+
+</div>
+</td>
+<td width="10"> </td>
+<td valign="top">
+<div class="dashbox">
+
+<h3>Classes</h3>
+<p>
+<span class="big"><a href="http://localhost:9000/drilldown/measures/8033?metric=classes" class="" rel="" title=""><span id="m_classes">60</span></a></span>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+<p><a href="http://localhost:9000/drilldown/measures/8033?metric=packages" class="" rel="" title=""><span id="m_packages">17</span> packages</a> <img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+
+<p><a href="http://localhost:9000/drilldown/measures/8033?metric=functions" class="" rel="" title=""><span id="m_functions">409</span> functions</a> <img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+
+<p><a href="http://localhost:9000/drilldown/measures/8033?metric=accessors" class="" rel="" title=""><span id="m_accessors">35</span> accessors</a> </p>
+
+</div>
+</td>
+</tr>
+</tbody></table>
+
+<div class="clear"></div>
+</div>
+
+<div style="clear: both;"></div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="block" id="block_2">
+
+<div class="documentation_comments" style="height:100%;">
+
+<div class="widget">
+
+<table width="100%">
+<tbody>
+<tr>
+
+<td valign="top" width="50%">
+<div class="dashbox">
+<p class="title">Documentation</p>
+<p>
+
+<span class="big"><a href="http://localhost:9000/drilldown/measures/8033?highlight=public_documented_api_density&metric=public_undocumented_api" class="" rel="" title=""><span id="m_public_documented_api_density">0,4%</span></a></span> docu. API
+
+</p>
+<p>
+<a href="http://localhost:9000/drilldown/measures/8033?metric=public_api" class="" rel="" title=""><span id="m_public_api">224</span> public API</a>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+<p>
+<a href="http://localhost:9000/drilldown/measures/8033?metric=public_undocumented_api" class="" rel="" title=""><span id="m_public_undocumented_api">223</span> undocu. API</a>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-green.png" title="" width="10"></p>
+</div>
+</td>
+
+<td valign="top" width="50%">
+<div class="dashbox">
+<p class="title">Comments</p>
+<p>
+<span class="big">
+<a href="http://localhost:9000/drilldown/measures/8033?metric=comment_lines_density" class="" rel="" title=""><span id="m_comment_lines_density">8,6%</span></a>
+</span>
+<img alt="" height="10" src="./SonarQube - QL_files/2-green.png" title="" width="10"></p>
+<p>
+<a href="http://localhost:9000/drilldown/measures/8033?metric=comment_lines" class="" rel="" title=""><span id="m_comment_lines">421</span> lines</a>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10"></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+
+<div class="clear"></div>
+</div>
+
+<div style="clear: both;"></div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="block" id="block_3">
+
+<div class="duplications" style="height:100%;">
+
+<div class="widget">
+
+<table width="100%">
+<tbody>
+<tr>
+<td valign="top" width="50%">
+<div class="dashbox">
+<p class="title">Duplications</p>
+<p>
+<span class="big"><a href="http://localhost:9000/drilldown/measures/8033?highlight=duplicated_lines_density&metric=duplicated_lines" class="" rel="" title=""><span id="m_duplicated_lines_density">11,9%</span></a></span>
+<img alt="" height="10" src="./SonarQube - QL_files/-1-green.png" title="" width="10"></p>
+<p>
+<a href="http://localhost:9000/drilldown/measures/8033?metric=duplicated_lines" class="" rel="" title=""><span id="m_duplicated_lines">695</span> lines</a>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-green.png" title="" width="10"></p>
+<p>
+<a href="http://localhost:9000/drilldown/measures/8033?metric=duplicated_blocks" class="" rel="" title=""><span id="m_duplicated_blocks">56</span> blocks</a>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-green.png" title="" width="10"></p>
+<p>
+<a href="http://localhost:9000/drilldown/measures/8033?metric=duplicated_files" class="" rel="" title=""><span id="m_duplicated_files">15</span> files</a>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-green.png" title="" width="10"></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+
+<div class="clear"></div>
+</div>
+
+<div style="clear: both;"></div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="block" id="block_4">
+
+<div class="complexity" style="height:100%;">
+
+<div class="widget">
+
+<table class="width100">
+<tbody>
+<tr>
+<td valign="top" width="50%">
+<div class="dashbox">
+<h3>Complexity</h3>
+
+<p>
+<span class="big"><a href="http://localhost:9000/drilldown/measures/8033?metric=function_complexity" class="" rel="" title=""><span id="m_function_complexity">2,7</span></a></span> /function
+
+</p>
+
+
+<p>
+<span class="big"><a href="http://localhost:9000/drilldown/measures/8033?metric=class_complexity" class="" rel="" title=""><span id="m_class_complexity">18,7</span></a></span> /class
+<img alt="" height="10" src="./SonarQube - QL_files/2-red.png" title="" width="10">
+</p>
+
+
+<p>
+<span class="big"><a href="http://localhost:9000/drilldown/measures/8033?metric=file_complexity" class="" rel="" title=""><span id="m_file_complexity">19,0</span></a></span> /file
+<img alt="" height="10" src="./SonarQube - QL_files/2-red.png" title="" width="10">
+</p>
+
+
+<p>
+Total: <a href="http://localhost:9000/drilldown/measures/8033?metric=complexity" class="" rel="" title=""><span id="m_complexity">1.122</span></a>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-black.png" title="" width="10">
+</p>
+
+</div>
+</td>
+<td valign="top" width="50%" nowrap="">
+
+<div class="dashbox" id="cmp_charts">
+<script type="text/javascript">
+//<![CDATA[
+function selectComplexity(metric) {
+$j('#cmp_charts .chart').each(function(index,chart) {
+chart.hide();
+});
+$j('#chart_' + metric).show();
+}
+</script>
+<style>
+#cmp_charts form {
+font-size: 93%;padding-left: 30px;
+}
+#cmp_charts form label {
+padding-right: 5px;
+}
+</style>
+
+
+<div id="chart_function_complexity_distribution" class="chart" style="display: block">
+<img alt="Functions distribution /complexity" id="chart_img_function_complexity_distribution" src="./SonarQube - QL_files/chart" title="Functions distribution /complexity"></div>
+
+
+
+
+<div id="chart_file_complexity_distribution" class="chart" style="display: none">
+<img alt="Files distribution /complexity" id="chart_img_file_complexity_distribution" src="./SonarQube - QL_files/chart(1)" title="Files distribution /complexity"></div>
+
+
+
+<form>
+
+<input type="radio" name="cmp_dist" value="function_complexity_distribution" id="cmp_dist_function_complexity_distribution" onclick="selectComplexity(&#39;function_complexity_distribution&#39;);" checked=""> <label for="cmp_dist_function_complexity_distribution">Functions</label>
+
+<input type="radio" name="cmp_dist" value="file_complexity_distribution" id="cmp_dist_file_complexity_distribution" onclick="selectComplexity(&#39;file_complexity_distribution&#39;);"> <label for="cmp_dist_file_complexity_distribution">Files</label>
+
+</form>
+</div>
+
+</td>
+</tr>
+</tbody>
+</table>
+<div class="clear"></div>
+
+<div class="clear"></div>
+</div>
+
+<div style="clear: both;"></div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="block" id="block_5">
+
+<div class="events" style="height:100%;">
+
+<div class="widget">
+
+<script type="text/javascript">
+function changeCategory(categoryId, widgetId) {
+var eventTableMaxSize = 8;
+$j('#events_' + widgetId + ' tr.event').hide();
+var elements;
+if (categoryId=='all') {
+elements = $j('#events_' + widgetId + ' tr.event');
+} else {
+elements = $j('#events_' + widgetId + ' tr.cat_' + categoryId);
+}
+var elementsToDisplay = elements.slice(0,eventTableMaxSize);
+if (elementsToDisplay.size()==0) {
+$j('#events_' + widgetId).hide();
+$j('#show_more_events_' + widgetId).hide();
+$j('#no_event_message_' + widgetId).show();
+} else {
+$j('#events_' + widgetId).show();
+$j('#no_event_message_' + widgetId).hide();
+elementsToDisplay.show();
+if (elements.size() > eventTableMaxSize) {
+$j('#show_more_events_' + widgetId).show();
+} else {
+$j('#show_more_events_' + widgetId).hide();
+}
+}
+}
+function showAllEvents(widgetId) {
+var selectedCategory = $j('#select_category_' + widgetId).val();
+if (selectedCategory=='all') {
+$j('#events_' + widgetId + ' tr.event').show();
+} else {
+$j('#events_' + widgetId + ' tr.cat_' + selectedCategory).show();
+}
+$j('#show_more_events_' + widgetId).hide();
+}
+</script>
+<h3>Events &nbsp;&nbsp;
+<select class="small" id="select_category_5" onchange="changeCategory(this.value, 5);">
+<option value="all">All</option>
+
+<option value="alert">Alert</option>
+
+<option value="other">Other</option>
+
+<option value="profile">Profile</option>
+
+<option value="version">Version</option>
+
+</select>
+</h3>
+<table id="events_5" class="spaced data">
+<thead>
+<tr>
+<th colspan="4"></th>
+</tr>
+</thead>
+<tbody>
+
+<tr class="even event cat_version" style="display: table-row;">
+<td x="Thu Nov 14 17:49:34 +0100 2013">14/11/2013</td>
+<td>Version</td>
+<td>0.1</td>
+<td>
+
+</td>
+</tr>
+
+</tbody>
+</table>
+<div id="no_event_message_5" style="margin: 5px; display: none;">
+<span class="empty_widget">No event</span>
+</div>
+<a href="http://localhost:9000/dashboard/index/8033#" onclick="showAllEvents(5);" id="show_more_events_5" class="action" style="display: none;">Show more</a>
+<script type="text/javascript">
+changeCategory('all', 5);
+</script>
+
+<div class="clear"></div>
+</div>
+
+<div style="clear: both;"></div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="block" id="block_6">
+
+<div class="description" style="height:100%;">
+
+<div class="widget box">
+
+<p class="marginbottom10">Description of SQL</p>
+
+<table class="width100 marginbottom10">
+<tbody>
+<tr>
+<td width="25%">Key: </td>
+<td width="75%" id="resource_key">ql</td>
+</tr>
+
+<tr>
+<td>Language: </td>
+<td id="resource_language">Java</td>
+</tr>
+
+
+<tr>
+<td>Profile:</td>
+<td><span id="resource_profile"><a href="http://localhost:9000/rules_configuration/index/2" id="profile_link">Sonar way</a></span> (version <span id="m_profile_version">1</span>)</td>
+</tr>
+
+
+</tbody>
+</table>
+</div>
+
+<div style="clear: both;"></div>
+</div>
+</div>
+
+
+
+
+</div>
+</div>
+
+<!-- the right margin with 1px is a trick for IE. See SONAR-2637 -->
+<div class="dashboard-column-wrapper" style="width: 50%;margin: 0 -1px 0 0;">
+<div class="dashboard-column" id="dashboard-column-2" style="margin: 0 0px 0 5px;">
+
+
+
+<div class="block" id="block_8">
+
+<div class="rules" style="height:100%;">
+
+<div class="widget">
+
+<table width="100%">
+<tbody><tr>
+<td width="50%" valign="top">
+<div class="dashbox">
+<h3>Issues</h3>
+<div class="marginbottom10">
+<span class="big">
+<a href="http://localhost:9000/drilldown/issues/ql" class="" rel="" title=""><span id="m_violations">143</span></a></span>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-green.png" title="" width="10">
+</div>
+
+<h3>Technical Debt</h3>
+<div>
+<span class="big">
+<a href="http://localhost:9000/drilldown/measures/8033?metric=sqale_index"><span id="m_sqale_index">11,4</span></a>
+</span>
+<span>days</span>
+<span><img alt="" height="10" src="./SonarQube - QL_files/-2-green.png" title="" width="10"></span>
+</div>
+
+</div>
+</td>
+<td width="50%" valign="top" nowrap="">
+
+<table class="clear width100">
+<tbody><tr>
+<td><img alt="Blocker" src="./SonarQube - QL_files/BLOCKER.png"></td>
+<td> &nbsp;<a href="http://localhost:9000/drilldown/issues/ql?severity=BLOCKER">Blocker</a></td>
+<td style="padding: 0 5px;" align="right">
+<span id="m_blocker_violations">0</span></td>
+<td>
+<img alt="" height="10" src="./SonarQube - QL_files/0.png" title="" width="10"></td>
+<td>&nbsp;</td>
+<td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+
+<div class="barchart" style="width: 70px"><div style="width: 0%;background-color:#777;"></div></div>
+
+
+</td>
+</tr>
+<tr>
+<td><img alt="Critical" src="./SonarQube - QL_files/CRITICAL.png"></td>
+<td> &nbsp;<a href="http://localhost:9000/drilldown/issues/ql?severity=CRITICAL">Critical</a></td>
+<td style="padding: 0 5px;" align="right">
+<span id="m_critical_violations">8</span></td>
+<td>
+<img alt="" height="10" src="./SonarQube - QL_files/0.png" title="" width="10"></td>
+<td>&nbsp;</td>
+<td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+
+<div class="barchart" style="width: 70px"><div style="width: 11%;background-color:#777;"></div></div>
+
+
+</td>
+</tr>
+<tr>
+<td><img alt="Major" src="./SonarQube - QL_files/MAJOR.png"></td>
+<td> &nbsp;<a href="http://localhost:9000/drilldown/issues/ql?severity=MAJOR">Major</a></td>
+<td style="padding: 0 5px;" align="right">
+<span id="m_major_violations">68</span></td>
+<td>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-green.png" title="" width="10"></td>
+<td>&nbsp;</td>
+<td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+
+<div class="barchart" style="width: 70px"><div style="width: 100%;background-color:#777;"></div></div>
+
+
+</td>
+</tr>
+<tr>
+<td><img alt="Minor" src="./SonarQube - QL_files/MINOR.png"></td>
+<td> &nbsp;<a href="http://localhost:9000/drilldown/issues/ql?severity=MINOR">Minor</a></td>
+<td style="padding: 0 5px;" align="right">
+<span id="m_minor_violations">67</span></td>
+<td>
+<img alt="" height="10" src="./SonarQube - QL_files/-2-green.png" title="" width="10"></td>
+<td>&nbsp;</td>
+<td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+
+<div class="barchart" style="width: 70px"><div style="width: 98%;background-color:#777;"></div></div>
+
+
+</td>
+</tr>
+<tr>
+<td><img alt="Info" src="./SonarQube - QL_files/INFO.png"></td>
+<td> &nbsp;<a href="http://localhost:9000/drilldown/issues/ql?severity=INFO">Info</a></td>
+<td style="padding: 0 5px;" align="right">
+<span id="m_info_violations">0</span></td>
+<td>
+<img alt="" height="10" src="./SonarQube - QL_files/0.png" title="" width="10"></td>
+<td>&nbsp;</td>
+<td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+
+<div class="barchart" style="width: 70px"><div style="width: 0%;background-color:#777;"></div></div>
+
+
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<div class="clear"></div>
+</div>
+
+<div style="clear: both;"></div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="block" id="block_12">
+
+<div class="code_coverage" style="height:100%;">
+
+<div class="widget">
+
+<table width="100%">
+<tbody><tr>
+<td valign="top" width="50%" nowrap="">
+<div class="dashbox">
+<p class="title">Unit Tests Coverage</p>
+<p>
+<span class="big">-</span>
+</p>
+
+
+
+</div>
+</td>
+<td valign="top" width="50%" nowrap="">
+
+<div class="dashbox">
+<h3>Unit test success</h3>
+<p><span class="big">
+</span>
+</p>
+<p>
+
+</p>
+<p>
+
+</p>
+<p>
+<a href="http://localhost:9000/drilldown/measures/8033?metric=tests" class="" rel="" title=""><span id="m_tests">0</span> tests</a>
+</p>
+
+<p>
+
+</p>
+</div>
+
+</td>
+</tr>
+</tbody></table>
+
+<div class="clear"></div>
+</div>
+
+<div style="clear: both;"></div>
+</div>
+</div>
+
+
+
+
+</div>
+</div>
+
+</div>
+<div style="clear: both;"></div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<div id="footer">
+
+<div id="ftlinks">
+<div>SonarQube™ technology is powered by <a href="http://www.sonarsource.com/" target="SonarSource SA">SonarSource SA</a></div>
+<div>
+Version 4.0 -
+<a href="http://www.sonarqube.org/" target="sonar">Community</a> -
+<a href="http://www.sonarqube.org/documentation" target="sonar_doc">Documentation</a> -
+<a href="http://www.sonarqube.org/support" target="support">Get Support</a> -
+<a href="http://sonar-plugins.codehaus.org/" target="plugins">Plugins</a>
+
+<br><span class="yellowHighlight" id="evaluation_warning">Embedded database should be used for evaluation purpose only</span>
+
+</div>
+<!--[if lte IE 7]><br/><span class="ie-warn">Your web browser is outdated. This website may not display correctly.</span><![endif]-->
+</div>
+</div>
+
+
+
+<script>
+
+
+
+</script>
+
+
+</body></html>

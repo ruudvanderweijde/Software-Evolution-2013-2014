@@ -1,0 +1,1128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- saved from url=(0439)http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index -->
+<html><script>navigator.CookiesOK="I explicitly accept all cookies";</script><script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="gwt:property" content="locale=nl">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<link rel="shortcut icon" type="image/x-icon" href="http://localhost:9000/images/favicon.ico?1383751212">
+
+<title>SonarQube</title>
+
+<link href="./SonarQube All_files/sonar.css" media="all" rel="stylesheet" type="text/css">
+<style>
+#comparison-page td {
+vertical-align: middle;
+}
+#comparison-page .move-actions img {
+visibility: hidden;
+}
+#comparison-page .move-actions:hover img {
+visibility: visible;
+}
+</style>
+<script src="./SonarQube All_files/sonar.js" type="text/javascript"></script>
+<!--[if lte IE 8]><script src="/javascripts/protovis-msie.js?1383751212" type="text/javascript"></script><![endif]-->
+<script>var baseUrl = '';
+var $j = jQuery.noConflict();
+$j(document).ready(function () {$j('.open-modal').modal()});
+</script>
+
+<script>
+function submitForm() {
+$j('#compare-form').submit();
+}
+function moveLeft(index) {
+sids = $j('#sids').val().split(',');
+idToLeft = sids[index];
+idToRight = sids[index - 1];
+sids.splice(index - 1, 2, [idToLeft, idToRight]);
+$j('#sids').val(sids.join(','));
+submitForm();
+}
+function moveRight(index) {
+sids = $j('#sids').val().split(',');
+idToRight = sids[index];
+idToLeft = sids[index + 1];
+sids.splice(index, 2, [idToLeft, idToRight]);
+$j('#sids').val(sids.join(','));
+submitForm();
+}
+function moveUp(index) {
+metrics = $j('#metrics').val().split(',');
+idToUp = metrics[index];
+idToBottom = metrics[index - 1];
+metrics.splice(index - 1, 2, [idToUp, idToBottom]);
+$j('#metrics').val(metrics.join(','));
+submitForm();
+}
+function moveDown(index) {
+metrics = $j('#metrics').val().split(',');
+idToBottom = metrics[index];
+idToUp = metrics[index + 1];
+metrics.splice(index, 2, [idToUp, idToBottom]);
+$j('#metrics').val(metrics.join(','));
+submitForm();
+}
+function removeFromList(index, inputField) {
+value = inputField.val().split(',');
+value.splice(index, 1);
+inputField.val(value.join(','));
+submitForm();
+}
+</script>
+<script>if(window.CookiesOK) window.CookiesOK("3.1.3");</script></head>
+<body style="">
+
+
+
+<div id="container">
+<div id="hd">
+<div id="nav-left">
+<ul>
+<li>
+<a href="http://localhost:9000/">Dashboards</a>
+</li>
+<script>
+if (supports_html5_storage()) {
+var sonarRecentHistory = new Sonar.RecentHistory();
+}
+</script>
+<li>
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="if (sonarRecentHistory) { sonarRecentHistory.populateRecentHistoryPanel(); }; showDropdownMenu(&#39;projects-menu&#39;); return false;" class="link-more">Projects</a>
+<div id="projects-menu" class="dropdown-menu" style="max-width: none; display: none;">
+<div id="recent-history" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+<h2>Recent Projects</h2>
+<ul id="recent-history-list">
+</ul>
+</div>
+<div>
+<ul>
+
+<li><a href="http://localhost:9000/all_projects?qualifier=TRK">All Projects</a></li>
+
+</ul>
+</div>
+</div>
+</li>
+<script>
+if (sonarRecentHistory == null) {
+$j('#recent-history').detach();
+}
+
+</script>
+<li>
+<a href="http://localhost:9000/measures">Measures</a>
+</li>
+<li>
+<a href="http://localhost:9000/issues/index">Issues</a>
+</li>
+<li>
+<a href="http://localhost:9000/profiles">Quality Profiles</a>
+</li>
+</ul>
+</div>
+<div id="nav">
+<ul>
+<li>
+<input type="text" size="15" name="search" id="searchInput" onfocus="autocompleteResources()" value="Search">
+<img src="./SonarQube All_files/loading-small.gif" id="searchingResources" style="display:none">
+</li>
+
+<li><a href="http://localhost:9000/sessions/new?return_to=%2Fcomparison%2Findex%3Fsids%3D200%252C22655%252C9%252C762%26metrics%3Dncloc%252Clines%252Ccomment_lines_density%252Cviolations%252Ccomplexity%252Cfile_complexity%252Cclass_complexity%252Cfunction_complexity%252Ccomplexity_in_functions%252Cduplicated_lines_density%252Cduplicated_blocks%252Cduplicated_files%252Cduplicated_lines%252Csigmm-maintainability%252Csigmm-analysability%252Csigmm-changeability%252Csigmm-stability%252Csigmm-testability%252Cfunctions%252Csqale_index">Log in</a></li>
+
+
+</ul>
+</div>
+<div id="searchResourcesResults" class="autocomplete" style="display:none"></div>
+</div>
+<div id="body">
+
+<div id="sidebar">
+<ul class="sidebar blue-sidebar">
+
+
+<li class="">
+<a href="http://localhost:9000/dashboard/?did=5">Home</a>
+</li>
+
+
+<li class="spacer"></li>
+<li class="sidebar-title">Tools</li>
+<li class="">
+<a href="http://localhost:9000/dependencies/index">Dependencies</a></li>
+<li class="active">
+<a href="http://localhost:9000/comparison/index">Compare</a>
+</li>
+
+
+<li id="logo">
+<center><a href="http://www.sonarqube.org/" target="SonarSource"><img alt="Embrace Quality" height="24" src="./SonarQube All_files/sonarqube-24x100.png" title="Embrace Quality" width="100"></a></center>
+</li>
+</ul>
+</div>
+
+
+<div id="content" class="with_sidebar">
+
+<div class="error" id="error" style="display:none">
+<span id="errormsg"></span> &nbsp;&nbsp;[<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="javascript:$j(&#39;#error&#39;).hide();return false;">hide</a>]
+</div>
+<div class="notice" id="info" style="display:none">
+<span id="infomsg"></span> &nbsp;&nbsp;[<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="javascript:$j(&#39;#info&#39;).hide();return false;">hide</a>]
+</div>
+<div class="warning" id="warning" style="display:none">
+<span id="warningmsg"></span> &nbsp;&nbsp;[<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="javascript:$j(&#39;#warning&#39;).hide();return false;">hide</a>]
+</div>
+
+
+<div id="comparison-page">
+<form method="GET" id="compare-form" action="http://localhost:9000/comparison/index">
+<input type="hidden" name="sids" id="sids" value="200,22655,9,762">
+<input type="hidden" name="metrics" id="metrics" value="ncloc,lines,comment_lines_density,violations,complexity,file_complexity,class_complexity,function_complexity,complexity_in_functions,duplicated_lines_density,duplicated_blocks,duplicated_files,duplicated_lines,sigmm-maintainability,sigmm-analysability,sigmm-changeability,sigmm-stability,sigmm-testability,functions,sqale_index">
+<div style="margin-bottom: 4px">
+<div id="metric_div" style="display: inline-block">
+<div class="select2-container" id="s2id_new_metric" style="width: 250px">    <a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="return false;" class="select2-choice select2-default">   <span>Add metric</span><abbr class="select2-search-choice-close" style="display: none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><select id="new_metric" name="" style="display: none;"><option value=""></option><optgroup label="Complexity"><option value="complexity_in_classes">Complexity in classes</option></optgroup><optgroup label="Design"><option value="ca">Afferent couplings</option>
+<option value="ce">Efferent couplings</option>
+<option value="package_tangles">File dependencies to cut</option>
+<option value="lcom4">LCOM4</option>
+<option value="package_cycles">Package cycles</option>
+<option value="package_feedback_edges">Package dependencies to cut</option>
+<option value="package_tangle_index">Package tangle index</option>
+<option value="rfc">Response for Class</option>
+<option value="suspect_lcom4_density">Suspect LCOM4 density</option></optgroup><optgroup label="Documentation"><option value="comment_blank_lines">Blank comments</option>
+<option value="comment_lines">Comment lines</option>
+<option value="commented_out_code_lines">Commented-out LOC</option>
+<option value="public_documented_api_density">Public documented API (%)</option>
+<option value="public_undocumented_api">Public undocumented API</option></optgroup><optgroup label="General"><option value="alert_status">Alert</option></optgroup><optgroup label="Issues"><option value="blocker_violations">Blocker issues</option>
+<option value="confirmed_issues">Confirmed issues</option>
+<option value="critical_violations">Critical issues</option>
+<option value="false_positive_issues">False positive issues</option>
+<option value="info_violations">Info issues</option>
+<option value="major_violations">Major issues</option>
+<option value="minor_violations">Minor issues</option>
+<option value="open_issues">Open issues</option>
+<option value="reopened_issues">Reopened issues</option>
+<option value="violations_density">Rules compliance</option>
+<option value="weighted_violations">Weighted issues</option></optgroup><optgroup label="Management"><option value="burned_budget">Burned budget</option>
+<option value="business_value">Business value</option>
+<option value="team_size">Team size</option></optgroup><optgroup label="Size"><option value="accessors">Accessors</option>
+<option value="classes">Classes</option>
+<option value="directories">Directories</option>
+<option value="files">Files</option>
+<option value="generated_lines">Generated Lines</option>
+<option value="generated_ncloc">Generated lines of code</option>
+<option value="packages">Packages</option>
+<option value="projects">Projects</option>
+<option value="public_api">Public API</option>
+<option value="statements">Statements</option></optgroup><optgroup label="Tests"><option value="branch_coverage">Branch coverage</option>
+<option value="coverage">Coverage</option>
+<option value="line_coverage">Line coverage</option>
+<option value="lines_to_cover">Lines to cover</option>
+<option value="skipped_tests">Skipped unit tests</option>
+<option value="uncovered_conditions">Uncovered branches</option>
+<option value="uncovered_lines">Uncovered lines</option>
+<option value="tests">Unit tests</option>
+<option value="test_execution_time">Unit tests duration</option>
+<option value="test_errors">Unit tests errors</option>
+<option value="test_failures">Unit tests failures</option>
+<option value="test_success_density">Unit tests success (%)</option></optgroup><optgroup label="Tests (Integration)"><option value="it_branch_coverage">IT branch coverage</option>
+<option value="it_coverage">IT coverage</option>
+<option value="it_line_coverage">IT line coverage</option>
+<option value="it_uncovered_conditions">IT uncovered branches</option>
+<option value="it_uncovered_lines">IT uncovered lines</option></optgroup><optgroup label="Tests (Overall)"><option value="overall_branch_coverage">Overall branch coverage</option>
+<option value="overall_coverage">Overall coverage</option>
+<option value="overall_line_coverage">Overall line coverage</option>
+<option value="overall_uncovered_conditions">Overall uncovered branches</option>
+<option value="overall_uncovered_lines">Overall uncovered lines</option></optgroup></select><script>$j(document).ready(function() {$j('#new_metric').select2({formatNoMatches:function(term){return 'No matches'},width:'250px',placeholder:'Add metric',allowClear:true});});</script><script>
+// we don't want this parameter to be submitted, so we set its name to ''
+$j('#new_metric').attr('name', '');
+$j('#new_metric').change(function (event) {
+var metric = event.target.value;
+if (metric != null) {
+var currentMetrics = $j('#metrics').val();
+if (currentMetrics.length > 0) {
+currentMetrics += ',';
+}
+currentMetrics += metric;
+$j('#metrics').val(currentMetrics);
+$j('#compare-form').submit();
+}
+});
+</script>
+</div>
+<div id="resource_div" style="display: inline-block; margin-left: 30px">
+<div class="select2-container" id="s2id_new_resource" style="width: 250px">    <a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="return false;" class="select2-choice select2-default">   <span>Add project</span><abbr class="select2-search-choice-close" style="display: none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" id="new_resource" class="" name="" style="display: none;"><script>$j(document).ready(function(){$j('#new_resource').select2({minimumInputLength:2,allowClear:false,formatNoMatches:function(term){return 'No matches'},formatSearching:function(){return 'Searching...'},formatInputTooShort:function(term, minLength){return 'Please enter at least 2 characters'},width:'250px',ajax:{quietMillis:300,url:'/api/resources/search?f=s2&qp=comparable',data:function (term, page) {return {s:term, p:page}},results:function (data, page) {return {more: data.more, results: data.results}}},placeholder:'Add project'});});</script><script>
+// we don't want this parameter to be submitted, so we set its name to ''
+$j('#new_resource').attr('name', '');
+$j('#new_resource').change(function (event) {
+var id = event.target.value;
+if (id != null) {
+$j('#version_loading').show();
+$j.ajax({
+type:'GET',
+url:'/comparison/versions?resource='
++ id + '&sids='
++ $j('#sids').val(),
+success:function (data) {
+$j('#new_version').html(data);
+$j('#new_version').select2({placeholder:'Select a version'});
+$j('#version_loading').hide();
+$j('#version_div').show();
+$j('#version_div').css("display", "inline-block");
+$j('#new_version').select2("focus");
+}
+});
+}
+});
+$j('#new_resource').select2("focus");
+</script>
+</div>
+<span id="version_loading" class="loading" style="display: none"></span>
+<div id="version_div" style="display: none">
+<select id="new_version">
+</select>
+<script>
+$j('#new_version').change(function (event) {
+var id = event.target.value;
+if (id != null) {
+var currentSnapshotIds = $j('#sids').val();
+if (currentSnapshotIds.length > 0) {
+currentSnapshotIds += ',';
+}
+currentSnapshotIds += id;
+$j('#sids').val(currentSnapshotIds);
+$j('#compare-form').submit();
+}
+});
+</script>
+</div>
+</div>
+<table class="data">
+<thead>
+<tr id="edit-columns-header">
+<th></th>
+
+<th class="thin move-actions" style="padding: 5px !important;">
+<table>
+<tbody><tr>
+<td style="vertical-align: bottom;">
+
+<img src="./SonarQube All_files/transparent_16.gif">
+
+</td>
+<td style="text-align: center; min-width: 100px">
+<div style="width: 100%; text-align: center;">
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(0, $j(&#39;#sids&#39;))" id="del-r-0"><img src="./SonarQube All_files/cross-gray.png" title="Suppress column"></a>
+</div>
+</td>
+<td style="vertical-align: bottom;">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveRight(0)" id="right-0"><img src="./SonarQube All_files/move_right.png" title="Move right"></a>
+
+</td>
+</tr>
+</tbody></table>
+</th>
+
+<th class="thin move-actions" style="padding: 5px !important;">
+<table>
+<tbody><tr>
+<td style="vertical-align: bottom;">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveLeft(1)" id="left-1"><img src="./SonarQube All_files/move_left.png" title="Move left"></a>
+
+</td>
+<td style="text-align: center; min-width: 100px">
+<div style="width: 100%; text-align: center;">
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(1, $j(&#39;#sids&#39;))" id="del-r-1"><img src="./SonarQube All_files/cross-gray.png" title="Suppress column"></a>
+</div>
+</td>
+<td style="vertical-align: bottom;">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveRight(1)" id="right-1"><img src="./SonarQube All_files/move_right.png" title="Move right"></a>
+
+</td>
+</tr>
+</tbody></table>
+</th>
+
+<th class="thin move-actions" style="padding: 5px !important;">
+<table>
+<tbody><tr>
+<td style="vertical-align: bottom;">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveLeft(2)" id="left-2"><img src="./SonarQube All_files/move_left.png" title="Move left"></a>
+
+</td>
+<td style="text-align: center; min-width: 100px">
+<div style="width: 100%; text-align: center;">
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(2, $j(&#39;#sids&#39;))" id="del-r-2"><img src="./SonarQube All_files/cross-gray.png" title="Suppress column"></a>
+</div>
+</td>
+<td style="vertical-align: bottom;">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveRight(2)" id="right-2"><img src="./SonarQube All_files/move_right.png" title="Move right"></a>
+
+</td>
+</tr>
+</tbody></table>
+</th>
+
+<th class="thin move-actions" style="padding: 5px !important;">
+<table>
+<tbody><tr>
+<td style="vertical-align: bottom;">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveLeft(3)" id="left-3"><img src="./SonarQube All_files/move_left.png" title="Move left"></a>
+
+</td>
+<td style="text-align: center; min-width: 100px">
+<div style="width: 100%; text-align: center;">
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(3, $j(&#39;#sids&#39;))" id="del-r-3"><img src="./SonarQube All_files/cross-gray.png" title="Suppress column"></a>
+</div>
+</td>
+<td style="vertical-align: bottom;">
+
+<img src="./SonarQube All_files/transparent_16.gif">
+
+</td>
+</tr>
+</tbody></table>
+</th>
+
+<th></th>
+</tr>
+<tr id="resource-info-header">
+<th></th>
+
+<th style="text-align: center; vertical-align: top;">
+<a href="http://localhost:9000/dashboard/index/hsqldb">HSQLDB</a>
+<br>
+<span class="note"><b>2.3.1</b></span>
+<br>
+<span class="note">09/11/2013</span>
+</th>
+
+<th style="text-align: center; vertical-align: top;">
+<a href="http://localhost:9000/dashboard/index/ql">QL</a>
+<br>
+<span class="note"><b>0.1</b></span>
+<br>
+<span class="note">14/11/2013</span>
+</th>
+
+<th style="text-align: center; vertical-align: top;">
+<a href="http://localhost:9000/dashboard/index/smallsql">SmallSQL</a>
+<br>
+<span class="note"><b>0.21</b></span>
+<br>
+<span class="note">09/11/2013</span>
+</th>
+
+<th style="text-align: center; vertical-align: top;">
+<a href="http://localhost:9000/dashboard/index/helloworld">HelloWorld</a>
+<br>
+<span class="note"><b>1.0</b></span>
+<br>
+<span class="note">09/11/2013</span>
+</th>
+
+<th></th>
+</tr>
+</thead>
+<tbody>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Lines of code</td>
+<td class="nowrap" style="padding-left: 10px">
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(0)" id="down-0"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(0, $j(&#39;#metrics&#39;))" id="del-m-0"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_ncloc">168.212</span></td>
+
+<td style="text-align: center">
+<span id="m_ncloc">4.484</span></td>
+
+<td style="text-align: center">
+<span id="m_ncloc">24.050</span></td>
+
+<td style="text-align: center">
+<span id="m_ncloc">71</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Lines</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(1)" id="up-1"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(1)" id="down-1"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(1, $j(&#39;#metrics&#39;))" id="del-m-1"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_lines">298.619</span></td>
+
+<td style="text-align: center">
+<span id="m_lines">5.833</span></td>
+
+<td style="text-align: center">
+<span id="m_lines">38.537</span></td>
+
+<td style="text-align: center">
+<span id="m_lines">111</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Comments (%)</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(2)" id="up-2"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(2)" id="down-2"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(2, $j(&#39;#metrics&#39;))" id="del-m-2"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_comment_lines_density">20,5%</span></td>
+
+<td style="text-align: center">
+<span id="m_comment_lines_density">8,6%</span></td>
+
+<td style="text-align: center">
+<span id="m_comment_lines_density">8,6%</span></td>
+
+<td style="text-align: center">
+<span id="m_comment_lines_density">7,8%</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Issues</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(3)" id="up-3"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(3)" id="down-3"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(3, $j(&#39;#metrics&#39;))" id="del-m-3"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_violations">20.039</span></td>
+
+<td style="text-align: center">
+<span id="m_violations">143</span></td>
+
+<td style="text-align: center">
+<span id="m_violations">4.610</span></td>
+
+<td style="text-align: center">
+<span id="m_violations">21</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Complexity</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(4)" id="up-4"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(4)" id="down-4"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(4, $j(&#39;#metrics&#39;))" id="del-m-4"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_complexity">46.436</span></td>
+
+<td style="text-align: center">
+<span id="m_complexity">1.122</span></td>
+
+<td style="text-align: center">
+<span id="m_complexity">7.915</span></td>
+
+<td style="text-align: center">
+<span id="m_complexity">19</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Complexity /file</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(5)" id="up-5"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(5)" id="down-5"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(5, $j(&#39;#metrics&#39;))" id="del-m-5"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_file_complexity">86,8</span></td>
+
+<td style="text-align: center">
+<span id="m_file_complexity">19,0</span></td>
+
+<td style="text-align: center">
+<span id="m_file_complexity">42,6</span></td>
+
+<td style="text-align: center">
+<span id="m_file_complexity">6,3</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Complexity /class</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(6)" id="up-6"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(6)" id="down-6"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(6, $j(&#39;#metrics&#39;))" id="del-m-6"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_class_complexity">67,4</span></td>
+
+<td style="text-align: center">
+<span id="m_class_complexity">18,7</span></td>
+
+<td style="text-align: center">
+<span id="m_class_complexity">41,0</span></td>
+
+<td style="text-align: center">
+<span id="m_class_complexity">6,3</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Complexity /function</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(7)" id="up-7"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(7)" id="down-7"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(7, $j(&#39;#metrics&#39;))" id="del-m-7"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_function_complexity">4,4</span></td>
+
+<td style="text-align: center">
+<span id="m_function_complexity">2,7</span></td>
+
+<td style="text-align: center">
+<span id="m_function_complexity">3,3</span></td>
+
+<td style="text-align: center">
+<span id="m_function_complexity">2,1</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Complexity in functions</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(8)" id="up-8"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(8)" id="down-8"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(8, $j(&#39;#metrics&#39;))" id="del-m-8"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_complexity_in_functions">46.334</span></td>
+
+<td style="text-align: center">
+<span id="m_complexity_in_functions">1.121</span></td>
+
+<td style="text-align: center">
+<span id="m_complexity_in_functions">7.913</span></td>
+
+<td style="text-align: center">
+<span id="m_complexity_in_functions">19</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Duplicated lines (%)</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(9)" id="up-9"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(9)" id="down-9"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(9, $j(&#39;#metrics&#39;))" id="del-m-9"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_duplicated_lines_density">4,4%</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_lines_density">11,9%</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_lines_density">4,0%</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_lines_density">34,2%</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Duplicated blocks</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(10)" id="up-10"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(10)" id="down-10"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(10, $j(&#39;#metrics&#39;))" id="del-m-10"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_duplicated_blocks">758</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_blocks">56</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_blocks">111</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_blocks">2</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Duplicated files</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(11)" id="up-11"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(11)" id="down-11"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(11, $j(&#39;#metrics&#39;))" id="del-m-11"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_duplicated_files">152</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_files">15</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_files">27</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_files">1</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Duplicated lines</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(12)" id="up-12"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(12)" id="down-12"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(12, $j(&#39;#metrics&#39;))" id="del-m-12"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_duplicated_lines">13.039</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_lines">695</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_lines">1.556</span></td>
+
+<td style="text-align: center">
+<span id="m_duplicated_lines">38</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">SIG MM</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(13)" id="up-13"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(13)" id="down-13"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(13, $j(&#39;#metrics&#39;))" id="del-m-13"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_sigmm-maintainability">-1</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-maintainability">-1</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-maintainability">-1</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-maintainability">-1</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Analysability Value</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(14)" id="up-14"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(14)" id="down-14"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(14, $j(&#39;#metrics&#39;))" id="del-m-14"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_sigmm-analysability">0</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-analysability">-1</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-analysability">0</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-analysability">-1</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Changeability Value</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(15)" id="up-15"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(15)" id="down-15"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(15, $j(&#39;#metrics&#39;))" id="del-m-15"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_sigmm-changeability">0</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-changeability">-1</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-changeability">0</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-changeability">0</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Stability Value</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(16)" id="up-16"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(16)" id="down-16"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(16, $j(&#39;#metrics&#39;))" id="del-m-16"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_sigmm-stability">-2</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-stability">-2</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-stability">-2</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-stability">-2</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Testability Value</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(17)" id="up-17"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(17)" id="down-17"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(17, $j(&#39;#metrics&#39;))" id="del-m-17"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_sigmm-testability">-2</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-testability">-2</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-testability">-2</span></td>
+
+<td style="text-align: center">
+<span id="m_sigmm-testability">-1</span></td>
+
+<td></td>
+</tr>
+
+<tr class="even move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Functions</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(18)" id="up-18"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveDown(18)" id="down-18"><img src="./SonarQube All_files/move_down.png" title="Move down"></a>
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(18, $j(&#39;#metrics&#39;))" id="del-m-18"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_functions">10.510</span></td>
+
+<td style="text-align: center">
+<span id="m_functions">409</span></td>
+
+<td style="text-align: center">
+<span id="m_functions">2.378</span></td>
+
+<td style="text-align: center">
+<span id="m_functions">9</span></td>
+
+<td></td>
+</tr>
+
+<tr class="odd move-actions">
+<td class="thin">
+<table>
+<tbody><tr>
+<td class="nowrap" style="vertical-align: bottom; width: 100%;">Technical Debt</td>
+<td class="nowrap" style="padding-left: 10px">
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="moveUp(19)" id="up-19"><img src="./SonarQube All_files/move_up.png" title="Move up"></a>
+
+
+<a href="http://localhost:9000/comparison/index?sids=200%2C22655%2C9%2C762&metrics=ncloc%2Clines%2Ccomment_lines_density%2Cviolations%2Ccomplexity%2Cfile_complexity%2Cclass_complexity%2Cfunction_complexity%2Ccomplexity_in_functions%2Cduplicated_lines_density%2Cduplicated_blocks%2Cduplicated_files%2Cduplicated_lines%2Csigmm-maintainability%2Csigmm-analysability%2Csigmm-changeability%2Csigmm-stability%2Csigmm-testability%2Cfunctions%2Csqale_index#" onclick="removeFromList(19, $j(&#39;#metrics&#39;))" id="del-m-19"><img src="./SonarQube All_files/cross-gray.png" title="Suppress line"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+<td style="text-align: center">
+<span id="m_sqale_index">831,1</span></td>
+
+<td style="text-align: center">
+<span id="m_sqale_index">11,4</span></td>
+
+<td style="text-align: center">
+<span id="m_sqale_index">181,1</span></td>
+
+<td style="text-align: center">
+<span id="m_sqale_index">0,7</span></td>
+
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</form>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<div id="footer">
+
+<div id="ftlinks">
+<div>SonarQube™ technology is powered by <a href="http://www.sonarsource.com/" target="SonarSource SA">SonarSource SA</a></div>
+<div>
+Version 4.0 -
+<a href="http://www.sonarqube.org/" target="sonar">Community</a> -
+<a href="http://www.sonarqube.org/documentation" target="sonar_doc">Documentation</a> -
+<a href="http://www.sonarqube.org/support" target="support">Get Support</a> -
+<a href="http://sonar-plugins.codehaus.org/" target="plugins">Plugins</a>
+
+<br><span class="yellowHighlight" id="evaluation_warning">Embedded database should be used for evaluation purpose only</span>
+
+</div>
+<!--[if lte IE 7]><br/><span class="ie-warn">Your web browser is outdated. This website may not display correctly.</span><![endif]-->
+</div>
+</div>
+
+
+
+<script>
+
+
+
+</script>
+
+
+</body></html>

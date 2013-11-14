@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="var" path="CLOVER_RUNTIME"/>
 	<classpathentry kind="src" path="hsqldb/integration/extAuthWithSpring/src"/>
 	<classpathentry kind="src" path="hsqldb/integration/hibernate_3_3_1/src"/>
 	<classpathentry kind="src" path="hsqldb/integration/hibernate/src"/>

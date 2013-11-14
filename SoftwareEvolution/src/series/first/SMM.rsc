@@ -64,9 +64,9 @@ public void printMI (map[str, num] mapMI) {
 
 public str measureToString(int measure) {
 	switch (measure) {
-		case 5:  return "++";
-		case 4:  return "+";
-		case 3:  return "o";
+		case 5: return "++";
+		case 4: return "+";
+		case 3: return "o";
 		case 2: return "-";
 		case 1: return "--";
 	}
