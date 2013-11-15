@@ -86,6 +86,7 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 projectModel) {
 	}
 	//printMap(stmtMap);		
 	int totalDecisionPoints = (0 | it + stmtMap[k] | k <- stmtMap ) + 1 ;
+	if (stmtMap["RETURN"] > 0) { stmtMap["RETURN"] -= 1;};
 	logMessage("Total decision points for method <methodName> method is : <totalDecisionPoints>", 2);
 	return totalDecisionPoints;
 }

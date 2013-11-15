@@ -24,6 +24,11 @@ public loc project1 = |project://hsqldb-2.3.1|;
 public loc project2 = |project://HelloWorld|;
 public loc project3 = |project://QL|;
 
+public loc project4 = |project://CodeAnalysisExamples|;
+public loc project5 = |project://SmallSQL|;
+public loc project6 = |project://HSQLDB|;
+
+
 @logLevel {
 	Log level 0 => no logging;
 	Log level 1 => main logging;
