@@ -36,7 +36,7 @@ private num getPrecentageOfDuplication(loc project) {
 	//tuple[num allLines, num dupeLines] result = getDuplicationUsingListMatching(sourceFilesForProject(project));
 		
 	logMessage("debug: total lines: <result.totalLines>", 2);
-	logMessage("debug: total dupes: <result.dupeLines>", 2);
+	logMessage("debug: total dupes: <result.dupeLines>", 1);
 	
 	return round((result.dupeLines / result.totalLines) * 100);
 }

@@ -117,10 +117,10 @@ public void showImage(map[str, num] pp, map[str, num] mi, int oi) {
 						edge("Testability", "UnitSize"),
 						edge("Testability", "UnitTesting"),
 						
-						edge("OveralIndex", "Analisability"),
-						edge("OveralIndex", "Changeability"),
-						edge("OveralIndex", "Stability"),
-						edge("OveralIndex", "Testability")]; 
+						edge("OveralIndex", "Analisability", lineWidth(2), lineStyle("dashdot")),
+						edge("OveralIndex", "Changeability", lineWidth(2), lineStyle("dashdot")),
+						edge("OveralIndex", "Stability", lineWidth(2), lineStyle("dashdot")),
+						edge("OveralIndex", "Testability", lineWidth(2), lineStyle("dashdot"))]; 
 
 	// create the image and the legend.
 	img = graph(nodes, edges, hint("layered"), gap(40));
