@@ -38,7 +38,13 @@ public void displayIndex(loc project) {
 	map[str, num] mi = productPropertiesToMaintainabilityIndex(pp);
 	logMessage("Maintainability index:", 1);
 	printMI(mi);
-	showImage(pp, mi);
+	int oi = overallIndex(mi);
+	logMessage("Overall index: <measureToString(oi)>", 1);
+	showImage(pp, mi, oi);
+}
+
+public int overallIndex(map[str, num] mi) {
+	return round((mi["Analisability"] + mi["Changeability"] + mi["Stability"] + mi["Testability"]) / 4);
 }
 
 public map[str, num] productPropertiesToMaintainabilityIndex(map[str, num] pp) {
@@ -83,19 +89,15 @@ public void logMessage(str message, int level) {
 	}
 }
 
-public void showImage(map[str, num] pp, map[str, num] mi) {
+public void showImage(map[str, num] pp, map[str, num] mi, int oi) {
+	// generated nodes
+	nodes = [box(text(key + " (" + measureToString(pp[key]) + ")", fontSize(10)), id(key), fillColor(getColor(pp[key])), size(100,25)) | key <- pp];
+	nodes += [box(text(key + " (" + measureToString(mi[key]) + ")", fontSize(15)), id(key), fillColor(getColor(mi[key])), size(140,40)) | key <- mi];
+	// add Root node
+	nodes += box(text("Overall Index (" + measureToString(oi) + ")", fontSize(20)), id("OveralIndex"), fillColor(getColor(oi)), size(220,55));
 	
-	nodes = []; 
-	edges = [];
 	
-	for (key <- pp) {
-		nodes += box(text(key + " (" + measureToString(pp[key]) + ")"), id(key), fillColor(getColor(pp[key])), size(75,20));
-	}
-	
-	for (key <- mi) {
-		nodes += box(text(key + " (" + measureToString(mi[key]) + ")"), id(key), fillColor(getColor(mi[key])), size(140,50));
-	}
-	iprintln(nodes);
+	//iprintln(nodes);
 	edges = [ edge("Analisability", "Volume"),
 						edge("Analisability", "Duplication"),
 						edge("Analisability", "UnitSize"),
@@ -108,19 +110,26 @@ public void showImage(map[str, num] pp, map[str, num] mi) {
 						
 						edge("Testability", "Complexity"),
 						edge("Testability", "UnitSize"),
-						edge("Testability", "UnitTesting")
-    	]; 
- 
-	render(graph(nodes, edges, hint("layered"), std(size(30)), gap(40)));	
+						edge("Testability", "UnitTesting"),
+						
+						edge("OveralIndex", "Analisability"),
+						edge("OveralIndex", "Changeability"),
+						edge("OveralIndex", "Stability"),
+						edge("OveralIndex", "Testability")]; 
+
+	// create the image and the legend.
+	img = graph(nodes, edges, hint("layered"), gap(40));
+	legend = hcat([box(text("<measureToString(i)>"), size(50,20), fillColor(color("<getColor(i)>", 0.9))) | i <- [1..6]]);
+ 	render(vcat([img, legend], gap(100),std(resizable(false))));
 }
 
 private str getColor(int score) {
 	switch(score) {
 		case 5: return "Green";
-		case 4: return "Blue";
-		case 3: return "Yellow";
-		case 2: return "Orange";
-		case 1: return "Red";
+		case 4: return "Yellow";
+		case 3: return "Orange";
+		case 2: return "Red";
+		case 1: return "Firebrick";
 	}
 }
 /* test functions */
