@@ -32,3 +32,7 @@ public Figure visNode(str color, ColoredTree left, ColoredTree right) =
 	tree(ellipse(fillColor(color)), [visColoredTree(left), visColoredTree(right)]);
 
 public ColoredTree  rb = red(black(leaf(1), red(leaf(2),leaf(3))), green(leaf(3), leaf(4)));
+
+public void show() {
+	render(space(visColoredTree(rb), std(size(30)), std(gap(30))));
+}
