@@ -1,0 +1,24 @@
+SmallSQL: 	Clover result: 78,6%
+2013-11-16 12:18:17 :: -- Result: 1634/2129 (76.7496477200%) methods invoked. Score: 3.
+
+HSQLDB: 	Clover result: 33,0%
+2013-11-16 12:25:48 :: -- Result: 6338/10263 (61.7558218800%) methods invoked. Score: 3.
+
+HelloWorld: 	Clover result none, no unittest...
+2013-11-16 12:26:20 :: -- Result: 0/14 (0.%) methods invoked. Score: 1.
+
+QL: 		Clover result: 69,5%
+2013-11-16 12:27:01 :: -- Result: 315/445 (70.7865168500%) methods invoked. Score: 3.
+
+UnitTest1: 	Clover result: 100%
+2013-11-16 12:27:18 :: -- Result: 2/2 (100.%) methods invoked. Score: 5.
+
+UnitTest2: 	Clover result: 70%
+2013-11-16 12:27:44 :: -- Result: 3/4 (75.00%) methods invoked. Score: 3.
+
+UnitTest3: 	Clover result: 62,5%
+2013-11-16 12:27:47 :: -- Result: 4/5 (80.0%) methods invoked. Score: 4.
+
+UnitTest4: 	Clover result: 87,5%
+2013-11-16 12:27:52 :: -- Result: 4/6 (66.6666666700%) methods invoked. Score: 3.
+

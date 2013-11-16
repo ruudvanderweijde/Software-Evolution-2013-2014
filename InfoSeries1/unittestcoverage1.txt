@@ -1,0 +1,19 @@
+rascal>getCoverage(projectUT1);
+3
+2013-11-16 11:07:41 :: -- Result: 2/2 (100.%) methods invoked. Score: 5.
+int: 5
+
+rascal>getCoverage(projectUT2);
+1
+2013-11-16 11:07:46 :: -- Result: 3/4 (75.00%) methods invoked. Score: 3.
+int: 3
+
+rascal>getCoverage(projectUT3);
+2
+2013-11-16 11:08:13 :: -- Result: 2/5 (40.0%) methods invoked. Score: 2.
+int: 2
+
+rascal>getCoverage(projectUT4);
+4
+2013-11-16 11:09:03 :: -- Result: 4/6 (66.6666666700%) methods invoked. Score: 3.
+int: 3
