@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=${charset}"/>
+
+        <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <style type="text/css" media="screen">
+        @import url('style.css');
+        @import url('roundedcorners.css');
+        @import url('tree.css');
+            </style>
+    
+    <title>Clover</title>
+</head><body onload="setBrowserTitle('${headerTitle}: Dashboard')" style="min-width:200px">
+
+        
+<table cellspacing="0" cellpadding="0" class="barGraph">
+
+<tr valign="top">
+
+    <td class="hbreak" colspan="1">
+                <div class="tags roundedLarge" style="padding: 5px;">
+            <b class="ctop $cnrclass"><b class="cb1"></b><b class="cb2"></b><b class="cb3"></b><b class="cb4"></b></b>
+        <div class="roundedContent" style="padding: 5px;">
+                
+            <label class="titleText link" onkeyup="return help_dash_coverage;" onclick="self.location='cloverview:coverage'">Coverage</label><span> 1 classes, 5 / 8 elements</span>
+            <table><tr><td>62,5%
+</td>
+<td class="graphBar " align="center">
+<span class="sortValue">0.625</span>
+<div>
+    <div style="width: 200px; font-size:0px;"></div>
+    <div title="37,5% Not Covered"  style="min-width: 200px;"  class="barNegative ">
+       <div title="62,5% Covered" class="barPositive " style="width: 62.5%"></div>
+    </div>
+</div></td></tr></table>
+                </div>
+            <b class="cbottom"><b class="cb4"></b><b class="cb3"></b><b class="cb2"></b><b class="cb1"></b></b>
+        </div>
+    
+                <div class="tags roundedLarge" style="padding: 5px;">
+            <b class="ctop $cnrclass"><b class="cb1"></b><b class="cb2"></b><b class="cb3"></b><b class="cb4"></b></b>
+        <div class="roundedContent" style="padding: 5px;">
+                            <label class="titleText link" onkeyup="return help_dash_test_results;" onclick="self.location='cloverview:testresults'">Test Results</label>
+                <span> <span class="">1 / 1</span> tests 0,01 secs</span>
+            <table>
+                                <tr>
+                    <td>100%</td>
+                    <td style="width:200px">
+                                                                    </td>
+                </tr>
+                            </table>
+                </div>
+            <b class="cbottom"><b class="cb4"></b><b class="cb3"></b><b class="cb2"></b><b class="cb1"></b></b>
+        </div>
+    
+        
+        
+                <div class="tags roundedLarge" style="padding: 5px;">
+            <b class="ctop $cnrclass"><b class="cb1"></b><b class="cb2"></b><b class="cb3"></b><b class="cb4"></b></b>
+        <div class="roundedContent" style="padding: 5px;">
+            <label class="titleText link" onkeyup="return help_dash_packages;" onclick="self.location='cloverview:coverage'">Most Complex Packages</label>
+        
+        <table>
+                    
+                        <tr><td>1. </td><td>62,5%
+</td>
+<td class="graphBar " align="center">
+<span class="sortValue">0.625</span>
+<div>
+    <div style="width: 40px; font-size:0px;"></div>
+    <div title="37,5% Not Covered"  style="min-width: 40px;"  class="barNegative ">
+       <div title="62,5% Covered" class="barPositive " style="width: 62.5%"></div>
+    </div>
+</div></td><td><a class="tag" href="javapkg:a">a</a> (4)</td></tr>
+                </table>
+                </div>
+            <b class="cbottom"><b class="cb4"></b><b class="cb3"></b><b class="cb2"></b><b class="cb1"></b></b>
+        </div>
+                    <div class="tags roundedLarge" style="padding: 5px;">
+            <b class="ctop $cnrclass"><b class="cb1"></b><b class="cb2"></b><b class="cb3"></b><b class="cb4"></b></b>
+        <div class="roundedContent" style="padding: 5px;">
+            <label class="titleText link" onkeyup="return help_dash_classes;" onclick="self.location='cloverview:coverage'">Most Complex Classes</label>
+        <table>
+                    
+                        <tr><td>1. </td><td>62,5%
+</td>
+<td class="graphBar " align="center">
+<span class="sortValue">0.625</span>
+<div>
+    <div style="width: 40px; font-size:0px;"></div>
+    <div title="37,5% Not Covered"  style="min-width: 40px;"  class="barNegative ">
+       <div title="62,5% Covered" class="barPositive " style="width: 62.5%"></div>
+    </div>
+</div></td><td>
+                    <a  class="tag" href="javaclass:/a/ControlFlow.java#3_14"  title="a.ControlFlow">ControlFlow</a>
+                (4)
+            </td></tr>
+                </table>
+
+                </div>
+            <b class="cbottom"><b class="cb4"></b><b class="cb3"></b><b class="cb2"></b><b class="cb1"></b></b>
+        </div>
+    
+                <div class="tags roundedLarge" style="padding: 5px;">
+            <b class="ctop $cnrclass"><b class="cb1"></b><b class="cb2"></b><b class="cb3"></b><b class="cb4"></b></b>
+        <div class="roundedContent" style="padding: 5px;">
+                <label class="titleText link" onkeyup="return help_dash_risks;" onclick="self.location='cloverview:toprisks'">Top 1 Project Risks</label>
+            <div>
+            
+                                           <a class="tag" href="javaclass:/a/ControlFlow.java#3_14"
+               style="font-size: 25px;color:#e4051a"
+               title="Average Method Complexity - 1,333 , Coverage - 62,5% ">ControlFlow</a>
+                                      </div>
+                </div>
+            <b class="cbottom"><b class="cb4"></b><b class="cb3"></b><b class="cb2"></b><b class="cb1"></b></b>
+        </div>
+    
+        
+
+                        <div class="tags roundedLarge" style="padding: 5px;">
+            <b class="ctop $cnrclass"><b class="cb1"></b><b class="cb2"></b><b class="cb3"></b><b class="cb4"></b></b>
+        <div class="roundedContent" style="padding: 5px;">
+                <label class="titleText link" onkeyup="return help_dash_untested_methods;" onclick="self.location='cloverview:quickwins'">Least Tested Methods</label>
+            <table>
+                
+                <tr>
+                    <td align="right">1.</td>
+                    <td align="right">60%</td>
+                    <td style="padding-left:25px; text-indent:-25px;">                      <a class="tag" title="ControlFlow.ControlFlow(int)" href="javamethod:/a/ControlFlow.java#4_2">ControlFlow.ControlFlow(<wbr>int)<wbr></a> (2)
+                    </td>
+                </tr>
+                            </table>
+                </div>
+            <b class="cbottom"><b class="cb4"></b><b class="cb3"></b><b class="cb2"></b><b class="cb1"></b></b>
+        </div>
+            
+    </td>
+</tr>
+
+<script type="text/javascript" src="jit.js" ></script>
+</body>
+
+</html>

@@ -23,6 +23,10 @@ public loc project1 = |project://hsqldb-2.3.1|;
 // test project
 public loc project2 = |project://HelloWorld|;
 public loc project3 = |project://QL|;
+public loc projectUT1 = |project://UnitTest1|;
+public loc projectUT2 = |project://UnitTest2|;
+public loc projectUT3 = |project://UnitTest3|;
+public loc projectUT4 = |project://UnitTest4|;
 
 public loc project4 = |project://CodeAnalysisExamples|;
 public loc project5 = |project://SmallSQL|;
