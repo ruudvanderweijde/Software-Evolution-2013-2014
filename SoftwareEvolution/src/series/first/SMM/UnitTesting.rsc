@@ -75,27 +75,3 @@ public int getScore(num percentage) {
 	else 					   return 1;
 }
 
-public void getNumberOfAsserts(loc project) {
-	M3 projectAST = createM3FromEclipseProject(project);
-	int cnt = 0;
-	for (methodLoc <- methods(projectAST)) { 
-		//assertsPerMethod(methodLoc, projectAST);
-		cnt = assertsPerMethod(methodLoc, projectAST);
-		if (cnt > 0) {
-			println("# of asserts <cnt> in file: <methodLoc>");
-		}
-		//println("<assertsPerMethod(methodLoc, projectAST)>");
-	}
-	
-}
-
-
-public int assertsPerMethod(loc methodName, M3 myModel) {
-	int numberOfAsserts = 0; 
-	methodAST = getMethodASTEclipse(methodName, model = myModel);
-	visit(methodAST) {
-		case x:\assert(_)		: numberOfAsserts += 1;
-    	case x:\assert(_, _)	: numberOfAsserts += 1;
-	}
-	return numberOfAsserts;
-}
