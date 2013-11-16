@@ -8,8 +8,8 @@ import series::first::SMM;
 import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
 
-@doc {
-This method is based on the paper "Static Estimation of Test Coverage" by Tiago Alves and Joost Visser
+@doc { This method is based on the paper "Static Estimation of Test Coverage" by Tiago Alves and Joost Visser
+Please not that we do not include static method analysis.
 }
 public int getScoreOfUnitTesting(loc project) {
 	logMessage("Calculating unittest coverage...", 1);
