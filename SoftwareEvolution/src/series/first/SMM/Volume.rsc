@@ -33,6 +33,17 @@ public list[str] linesOfFile(loc file) {
 		};
 }
 
+public list[str] linesOfFileWithComments(loc file) {
+	return 
+		for (line <- split("\n", readFile(file))) {
+			// skip empty lines
+			if (/^[ \t]*$/ := line) {
+				continue;
+			}
+			append line;
+		};
+}
+
 private str stripMultiLineComments(str fileString) {
 	// match /* to */, but /* must not be between strings, like String = " /* ";
 	for (/<commentML:(?=(?:[^"\\]*(?:\\.|"(?:[^"\\]*\\.)*[^"\\]*"))*[^"]*$)\/\*(?s).*?\*\/>/ := fileString) {

@@ -13,14 +13,15 @@ import lang::java::m3::Core;
 import lang::java::jdt::m3::Core;
 
 import series::first::SMM::Volume;
-import series::first::SMM::CC;
+import series::first::SMM::Complexity;
 import series::first::SMM::Duplication;
 import series::first::SMM::UnitSize;
 import series::first::SMM::UnitTesting;
 
 public loc project0 = |project://smallsql0.21_src|;
 public loc project1 = |project://hsqldb-2.3.1|;
-// test project
+
+// test projects
 public loc project2 = |project://HelloWorld|;
 public loc project3 = |project://QL|;
 public loc projectUT1 = |project://UnitTest1|;
