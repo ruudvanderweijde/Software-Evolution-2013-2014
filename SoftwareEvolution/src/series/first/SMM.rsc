@@ -28,6 +28,7 @@ public loc projectUT1 = |project://UnitTest1|;
 public loc projectUT2 = |project://UnitTest2|;
 public loc projectUT3 = |project://UnitTest3|;
 public loc projectUT4 = |project://UnitTest4|;
+public loc projectUT5 = |project://UnitTest5|;
 
 public loc project4 = |project://CodeAnalysisExamples|;
 public loc project5 = |project://SmallSQL|;
@@ -53,10 +54,6 @@ public void displayIndex(loc project) {
 	showImage(pp, mi, oi);
 }
 
-public int overallIndex(map[str, num] mi) {
-	return round((mi["Analisability"] + mi["Changeability"] + mi["Stability"] + mi["Testability"]) / 4);
-}
-
 public map[str, num] productPropertiesToMaintainabilityIndex(map[str, num] pp) {
 	return (
 		"Analisability" : round((pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4),
@@ -76,13 +73,17 @@ public map[str, num] getProductProperties(loc project) {
 	);
 }
 
-public void printMI (map[str, num] mapMI) {
+public int overallIndex(map[str, num] mi) {
+	return round((mi["Analisability"] + mi["Changeability"] + mi["Stability"] + mi["Testability"]) / 4);
+}
+
+private void printMI (map[str, num] mapMI) {
 	for(x <- mapMI) { 
 		println("<x>: \t<measureToString(mapMI[x])>");
 	}
 }
 
-public str measureToString(int measure) {
+private str measureToString(int measure) {
 	switch (measure) {
 		case 5: return "++";
 		case 4: return "+";
@@ -92,7 +93,9 @@ public str measureToString(int measure) {
 	}
 }
 
+@doc { }
 public void logMessage(str message, int level) {
+	println("level = <level>; logLevel = <logLevel>; <(level <= logLevel)>");
 	if (level <= logLevel) {
 		str date = printDate(now(), "Y-MM-dd HH:mm:ss");
 		println("<date> :: <message>");

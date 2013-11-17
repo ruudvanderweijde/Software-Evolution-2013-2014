@@ -13,12 +13,15 @@ Please not that we do not include static method analysis.
 }
 public int getScoreOfUnitTesting(loc project) {
 	logMessage("Calculating unittest coverage...", 1);
-	int coverageScore = getCoverage(project);
-	// result is printed below
-	return coverageScore;
+
+	tuple[num totalMethods, num invokedMethods] measures = getMeasures(project);
+	num percentage = getPercentage(measures.totalMethods, measures.invokedMethods);
+	int score = getScore(percentage);
+	logMessage("-- Result: <measures.totalMethods>/<measures.invokedMethods> (<percentage>%) methods invoked. Score: <score>.", 1);	
+	return score;
 }
 
-public int getCoverage(loc project) {
+public tuple[num, num] getMeasures(loc project) {
 	M3 projectAST = createM3FromEclipseProject(project);
 	set[loc] allMethods = methods(projectAST);
 	
@@ -27,7 +30,8 @@ public int getCoverage(loc project) {
 	//iprintln(allMethodRelations);
 
 	// exlude these methods
-	set[loc] startOfTestMethods = { from | <from,_> <- allMethodRelations, /Test/ := from.path, isMethod(from) };
+	set[loc] startOfTestMethods = { m | m <- allMethods, /Test/ := m.path };
+	
 	// Get all methods invoked by /test/ or /Test/ 
 	set[loc] startMethods = { to | <from,to:_> <- allMethodRelations, /Test/ := from.path};
 	// recursively get all 'next' methods
@@ -38,19 +42,11 @@ public int getCoverage(loc project) {
 	// & = intersection (the 'slice' function)
 	num invokedMethods = size(allInvokedMethods & allMethods);
 	
-	// get the score
-	num percentage = getPercentage(numberOfMethods, invokedMethods);
-	int score = getScore(percentage);
-	logMessage("-- Result: <invokedMethods>/<numberOfMethods> (<percentage>%) methods invoked. Score: <score>.", 1);	
-	return score;
-}
-
-public M3 expandRelationsForDynamicDispatch(M3 projectAST) {
-	//rel[loc,loc] dynamicClasses = { <x,y> | <x,y> <- declaredTopTypes(projectAST), x.file != y.file + ".java"};
-	rel[loc,loc] overrides = projectAST@methodOverrides;
+	//iprintln(startOfTestMethods);
+	//iprintln(allMethods - startOfTestMethods);
+	//iprintln(allInvokedMethods & allMethods);
 	
-	//projectAST@
-	return projectAST;
+	return <numberOfMethods, invokedMethods>;
 }
 
 public set[loc] nextMethods(set[loc] methods, rel[loc,loc] allMethodRelations) {
@@ -62,6 +58,7 @@ public set[loc] nextMethods(set[loc] methods, rel[loc,loc] allMethodRelations) {
 		return allNextMethods + nextMethods(allNextMethods, allMethodRelations);
 	}
 }
+
 
 public num getPercentage(num allMethods, num invokedTestMethods) {
 	return (invokedTestMethods / allMethods) * 100;
@@ -75,3 +72,15 @@ public int getScore(num percentage) {
 	else 					   return 1;
 }
 
+@Doc { Test methods, based on the paper of Alves and Visser }
+private loc testProject1 = |project://UnitTest1|;
+private loc testProject2 = |project://UnitTest2|;
+private loc testProject3 = |project://UnitTest3|;
+private loc testProject4 = |project://UnitTest4|;
+private loc testProject5 = |project://UnitTest5|;
+
+public test bool projectCoverage1() = getMeasures(testProject1) == <2,2>;
+public test bool projectCoverage2() = getMeasures(testProject2) == <3,3>;
+public test bool projectCoverage3() = getMeasures(testProject3) == <5,4>;
+public test bool projectCoverage4() = getMeasures(testProject4) == <6,4>;
+public test bool projectCoverage5() = getMeasures(testProject5) == <3,3>; /* fails because statis analysis is not covered yet */
