@@ -7,6 +7,7 @@ import Set;
 import Map;
 import Relation;
 import util::Math;
+import util::Benchmark;
 
 import series::first::SMM;
 import series::first::SMM::Volume;
@@ -89,6 +90,78 @@ private tuple[num, num] getDuplicationUsingListMatching(set[loc] files) {
 	return <size(allLines),size(duplicateLines)>;
 }
 
+@doc {
+Benchmarking the different methods and their results...
+
++-----------------+--------------------+-----------------+-----------------+------------------+
+|     Project     | NoComments && Trim |   NoComments    |      Trim       | No modifications |
++-----------------+--------------------+-----------------+-----------------+------------------+
+| SmallSQL        | 11,3               | 9,5             | 26,3            | 27,6             |
+| HelloWorld      | 45,7               | 40,1            | 34,5            | 35,1             |
+| QL              | 28,9               | 27,6            | 26,3            | 27,7             |
+| --------------- | ---------------    | --------------- | --------------- | ---------------  |
+| SmallSQL Time   | 468s               | 528s            | 164s            | 185s             |
+| HelloWorld Time | 0,3s               | 0,2s            | 0s              | 0s               |
+| QL Time         | 100s               | 96s             | 6s              | 7s               |
++-----------------+--------------------+-----------------+-----------------+------------------+
+
+}
+public void triggerMethods() {
+	logMessage("project0: <project0>",1);
+	println("<benchmark(
+	(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), true, true);},
+		"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), true, false);},
+		"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), false, true);},
+		"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), false, false);}
+	))>");
+	
+	logMessage("project2: <project2>",1);
+	println("<benchmark(
+	(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project2), true, true);},
+		"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project2), true, false);},
+		"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project2), false, true);},
+		"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project2), false, false);}
+	))>");
+	
+	logMessage("project3: <project3>",1);
+	println("<benchmark(
+	(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project3), true, true);},
+		"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project3), true, false);},
+		"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project3), false, true);},
+		"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project3), false, false);}
+	))>");
+
+}
+
+public tuple[num, num] testDuplicationUsingStringMatching(set[loc] files, bool stripMLC, bool useTrim) {
+	// this set will contain the keys of allLines list which are duplicate lines.
+	set[int] duplicateLines = {};
+	list[str] allLines = [];
+	if (useTrim && stripMLC) {
+		allLines = ([] | it + [ trim(line) | line <- linesOfFile(f) ] | loc f <- files);
+	} else if (useTrim && !stripMLC) {
+		allLines = ([] | it + [ trim(line) | line <- linesOfFileWithComments(f) ] | loc f <- files);
+	} else if (!useTrim && stripMLC) {
+		allLines = ([] | it + [ line | line <- linesOfFile(f) ] | loc f <- files);
+	} else if (!useTrim && !stripMLC) {
+		allLines = ([] | it + [ line | line <- linesOfFileWithComments(f) ] | loc f <- files);
+	}
+	str allLinesTogether = intercalate("\n", allLines);
+	
+	for (startLine <- [0..(size(allLines)-duplicationBlock)]) {
+		str searchString = "\n" + intercalate("\n", slice(allLines, startLine, duplicationBlock));
+		if (size(findAll(allLinesTogether, searchString)) > 1) {
+			// mark these items as duplicate lines		
+			duplicateLines += toSet([startLine..(startLine+duplicationBlock)]);
+		}
+	}
+ 	//println("debug: all duplicate lines: <[ allLines[x] | x <- duplicateLines]>");
+ 	num lines = size(allLines);
+ 	num dupes = size(duplicateLines);
+ 	println("<<lines,dupes>> | <(size(duplicateLines)/size(allLines))>% | <(dupes/lines)*100>");
+	
+	return <lines,dupes>;
+}
 public bool testBothVersions(loc file) {
 	return getDuplicationUsingStringMatching(file) == getDuplicationUsingListMatching(file);
 }
