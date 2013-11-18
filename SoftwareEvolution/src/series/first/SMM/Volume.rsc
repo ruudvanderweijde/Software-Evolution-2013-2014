@@ -7,8 +7,11 @@ import series::first::SMM;
 import lang::java::jdt::Project;
 
 public int getLinesOfJava(loc project) {
-	return 168932;
-	//return (0 | it + linesOfFileSize(f) | loc f <- sourceFilesForProject(project));
+	// temporary 'cache' these records
+	if (project == project0) return 24111;
+	if (project == project1) return 168932;
+	// default function
+	return (0 | it + linesOfFileSize(f) | loc f <- sourceFilesForProject(project));
 }
 
 public int getScoreOfVolume(loc project) {
