@@ -38,7 +38,7 @@ public map[str,int] initializeStmtMap() {
 
 public int getScoreOfComplexity(loc project) {
 	logMessage("Calculating cyclomatic complexity...", 1);
-	projectModel = createM3FromEclipseProject(project);
+	M3 projectModel = createM3FromEclipseProject(project);
 	map [loc, num] methodSizeMap = getUnitSizePerMethod(project); 
 	map [loc, tuple[num linesOfCode, str riskStr]] complexityMap = ();
 	int methodCycComplexity = 0;
@@ -78,11 +78,12 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 projectModel) {
     	case \continue()	: stmtMap["CONTINUE"] += 1;
     	case \continue(_)	: stmtMap["CONTINUE"] += 1;
     	case \catch(_,_)	: stmtMap["CATCH"] += 1;
-    	case \try(_,_,_)	: stmtMap["FINALLY"] += 1;
     	case \throw(_)		: stmtMap["THROW"] += 1;
     	 
 		case \conditional(_,_,_) : stmtMap["SHORTCUT_IF"] += 1; 
-		// What do we do with the "THROWS"? 
+		// We do not count "throws"
+		// We do not count "finally", that's always executed
+		// We do not count "try", that's not conditional
 	}
 	//printMap(stmtMap);		
 	int totalDecisionPoints = (0 | it + stmtMap[k] | k <- stmtMap ) + 1 ;
