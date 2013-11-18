@@ -40,7 +40,7 @@ public loc project6 = |project://HSQLDB|;
 	Log level 1 => main logging;
 	Log level 2 => debug logging;
 }
-private int logLevel = 1;
+private int logLevel = 2;
 
 public void displayIndex(loc project) {
 	map[str, num] pp = getProductProperties(project);
