@@ -20,6 +20,7 @@ public int getScoreFromMatrix(num percVeryHigh, num percHigh, num percMedium) {
 	else 															  return 1;
 }
 
+@doc { this methods calculates precentages based on the lines of code }
 public int getScoreOfUnitSize(loc project) {
 	logMessage("Calculating size per unit...", 1);
 	map[loc, num] sizes = getUnitSizePerMethod(project);
