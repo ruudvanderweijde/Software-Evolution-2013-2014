@@ -119,13 +119,13 @@ public void triggerMethods() {
 	//	"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), false, false);}
 	//))>");
 	
-	logMessage("project1: <project1>",1);
-	println("<benchmark(
-	(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), true, true);},
-		"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), true, false);},
-		"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), false, true);},
-		"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), false, false);}
-	))>");
+	//logMessage("project1: <project1>",1);
+	//println("<benchmark(
+	//(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), true, true);},
+	//	"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), true, false);},
+	//	"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), false, true);},
+	//	"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), false, false);}
+	//))>");
 	
 	//logMessage("project2: <project2>",1);
 	//println("<benchmark(

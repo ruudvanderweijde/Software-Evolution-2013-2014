@@ -51,16 +51,8 @@ public void displayIndex(loc project) {
 	printMI(mi);
 	int oi = overallIndex(mi);
 	logMessage("Overall index: <measureToString(oi)>", 1);
+	// display the image
 	showImage(pp, mi, oi);
-}
-
-public map[str, num] productPropertiesToMaintainabilityIndex(map[str, num] pp) {
-	return (
-		"Analisability" : round((pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4),
-		"Changeability" : round((pp["Complexity"] + pp["Duplication"]) / 2),
-		"Stability"		: round((pp["UnitTesting"])),
-		"Testability"	: round((pp["Complexity"] + pp["UnitSize"] + pp["UnitTesting"]) / 3)
-	);
 }
 
 public map[str, num] getProductProperties(loc project) {
@@ -70,6 +62,15 @@ public map[str, num] getProductProperties(loc project) {
 		"Duplication"	: getScoreOfDuplication(project),
 		"UnitSize"		: getScoreOfUnitSize(project),
 		"UnitTesting"	: getScoreOfUnitTesting(project)
+	);
+}
+
+public map[str, num] productPropertiesToMaintainabilityIndex(map[str, num] pp) {
+	return (
+		"Analisability" : round((pp["Volume"] + pp["Duplication"] + pp["UnitSize"] + pp["UnitTesting"]) / 4),
+		"Changeability" : round((pp["Complexity"] + pp["Duplication"]) / 2),
+		"Stability"		: round((pp["UnitTesting"])),
+		"Testability"	: round((pp["Complexity"] + pp["UnitSize"] + pp["UnitTesting"]) / 3)
 	);
 }
 
