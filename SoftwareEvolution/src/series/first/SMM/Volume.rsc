@@ -7,7 +7,7 @@ import series::first::SMM;
 import lang::java::jdt::Project;
 
 public int getLinesOfJava(loc project) {
-	return (0 | it + size(linesOfFile(f)) | loc f <- sourceFilesForProject(project));
+	return (0 | it + linesOfFileSize(f) | loc f <- sourceFilesForProject(project));
 }
 
 public int getScoreOfVolume(loc project) {
@@ -16,6 +16,27 @@ public int getScoreOfVolume(loc project) {
 	int score = getScoreForLines(linesOfJava);
 	logMessage("-- Result: <linesOfJava> lines of code found. Score: <score>", 1);
 	return score;
+}
+
+public int counter = 0;
+
+public int linesOfFileSize(loc file) {
+	int count = 0; 
+	counter += 1;
+	//println("<counter> :: reading file: <file>");
+	for (line <- split("\n", stripMultiLineComments(readFile(file)))) {
+		// skip empty lines
+		if (/^[ \t]*$/ := line) {
+			continue;
+		}
+		// skip lines starting with //
+		if (/^[ \t]*\/\// := line) {
+			continue;
+		}
+		count += 1;
+	}
+	return count;
+
 }
 
 public list[str] linesOfFile(loc file) {
@@ -47,6 +68,7 @@ public list[str] linesOfFileWithComments(loc file) {
 private str stripMultiLineComments(str fileString) {
 	// match /* to */, but /* must not be between strings, like String = " /* ";
 	for (/<commentML:(?=(?:[^"\\]*(?:\\.|"(?:[^"\\]*\\.)*[^"\\]*"))*[^"]*$)\/\*(?s).*?\*\/>/ := fileString) {
+		//print(" .");
 		if (/\n/ := commentML) {
 			// if the comment contains new lines, replace it with a new line
 			fileString = replaceFirst(fileString, commentML, "\n");
@@ -54,6 +76,7 @@ private str stripMultiLineComments(str fileString) {
 			fileString = replaceFirst(fileString, commentML, "");
 		}
 	}
+	//println(" ");
 	return fileString;
 }
 

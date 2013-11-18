@@ -42,6 +42,7 @@ private num getPrecentageOfDuplication(loc project) {
 	return round((result.dupeLines / result.totalLines) * 100);
 }
 
+// this function is deprecated
 private tuple[num, num] getDuplicationUsingStringMatching(set[loc] files) {
 	// this set will contain the keys of allLines list which are duplicate lines.
 	set[int] duplicateLines = {};
@@ -61,6 +62,7 @@ private tuple[num, num] getDuplicationUsingStringMatching(set[loc] files) {
 	return <size(allLines),size(duplicateLines)>;
 }
 
+// this function is deprecated
 private tuple[num, num] getDuplicationUsingListMatching(set[loc] files) {
 	set[int] duplicateLines = {};
 	
