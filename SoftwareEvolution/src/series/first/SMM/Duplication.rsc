@@ -32,7 +32,7 @@ private int getScore(num percentage) {
 }
 private num getPrecentageOfDuplication(loc project) {
 	// method matching strings is faster then matching lists;
-	tuple[num totalLines, num dupeLines] result = testDuplicationUsingStringMatching(sourceFilesForProject(project), false, true);
+	tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project), false, true);
 	//tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatching(sourceFilesForProject(project));
 	//tuple[num allLines, num dupeLines] result = getDuplicationUsingListMatching(sourceFilesForProject(project));
 		
@@ -113,39 +113,39 @@ Benchmarking the different methods and their results...
 public void triggerMethods() {
 	//logMessage("project0: <project0>",1);
 	//println("<benchmark(
-	//(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), true, true);},
-	//	"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), true, false);},
-	//	"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), false, true);},
-	//	"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project0), false, false);}
+	//(	"tripMLC,trim" 	: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project0), true, true);},
+	//	"tripMLC" 		: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project0), true, false);},
+	//	"trim" 			: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project0), false, true);},
+	//	"none" 			: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project0), false, false);}
 	//))>");
 	
 	//logMessage("project1: <project1>",1);
 	//println("<benchmark(
-	//(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), true, true);},
-	//	"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), true, false);},
-	//	"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), false, true);},
-	//	"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project1), false, false);}
+	//(	"tripMLC,trim" 	: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project1), true, true);},
+	//	"tripMLC" 		: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project1), true, false);},
+	//	"trim" 			: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project1), false, true);},
+	//	"none" 			: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project1), false, false);}
 	//))>");
 	
 	//logMessage("project2: <project2>",1);
 	//println("<benchmark(
-	//(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project2), true, true);},
-	//	"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project2), true, false);},
-	//	"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project2), false, true);},
-	//	"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project2), false, false);}
+	//(	"tripMLC,trim" 	: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project2), true, true);},
+	//	"tripMLC" 		: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project2), true, false);},
+	//	"trim" 			: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project2), false, true);},
+	//	"none" 			: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project2), false, false);}
 	//))>");
 	
 	//logMessage("project3: <project3>",1);
 	//println("<benchmark(
-	//(	"tripMLC,trim" 	: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project3), true, true);},
-	//	"tripMLC" 		: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project3), true, false);},
-	//	"trim" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project3), false, true);},
-	//	"none" 			: void() {testDuplicationUsingStringMatching(sourceFilesForProject(project3), false, false);}
+	//(	"tripMLC,trim" 	: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project3), true, true);},
+	//	"tripMLC" 		: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project3), true, false);},
+	//	"trim" 			: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project3), false, true);},
+	//	"none" 			: void() {getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project3), false, false);}
 	//))>");
 
 }
 
-public tuple[num, num] testDuplicationUsingStringMatching(set[loc] files, bool stripMLC, bool useTrim) {
+public tuple[num, num] getDuplicationUsingStringMatchingWithParams(set[loc] files, bool stripMLC, bool useTrim) {
 	// this set will contain the keys of allLines list which are duplicate lines.
 	set[int] duplicateLines = {};
 	list[str] allLines = [];
