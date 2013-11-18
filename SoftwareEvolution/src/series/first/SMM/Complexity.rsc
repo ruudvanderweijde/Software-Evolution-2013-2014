@@ -53,7 +53,7 @@ public int getScoreOfComplexity(loc project) {
 	//printComplexityMap(complexityMap);
 	map [str, num] totalsMap = buildTotals(complexityMap);
 	//num totalLinesOfCode = getLinesOfJava(project);
-	
+	num totalLinesOfCode = 168932;
 	map [str, num] percentagesMap = calculatePercentages(totalsMap, totalLinesOfCode);
 	int finalComplexityScore = getScoreFromMatrix(percentagesMap[MODERATE], percentagesMap[HIGH], percentagesMap[VERY_HIGH]);
 	logMessage("-- Result: Cycl complexity score: <finalComplexityScore>. Details: <percentagesMap>", 1);
