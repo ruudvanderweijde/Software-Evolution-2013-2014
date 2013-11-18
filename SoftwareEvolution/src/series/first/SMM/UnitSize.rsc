@@ -4,6 +4,7 @@ import IO;
 import List;
 import Map;
 import Set;
+import Relation; /* used for test methods */
 import util::Math;
 
 import series::first::SMM;
@@ -93,21 +94,17 @@ public int getScoreOfUnitSizeOLD(loc project) {
 }
 
 public map[loc, num] getUnitSizePerMethod(project) {
-	//allMethods = methods(createM3FromEclipseProject(project));
-	//println("allMethods size: <size(allMethods)>");
-	//return (method:linesOfFileSize(method) | method <- allMethods);
 	return (method:size(linesOfFile(method)) | method <- methods(createM3FromEclipseProject(project)));
 }
 
-public loc testFile0 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/EmptyClass.java|;
-public loc testFile1 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/NormalClass.java|;
-public loc testFile2 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/SingleCommentedClass.java|;
-public loc testFile3 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/MultilineCommentedClass.java|;
-public loc testFile4 = |project://SoftwareEvolution/src/test/series/first/SMM/Volume/Annotations.java|;
+public loc testProject1 = |project://UnitTest1|;
+public loc testProject2 = |project://UnitTest2|;
+public loc testProject3 = |project://UnitTest3|;
+public loc testProject4 = |project://UnitTest4|;
+public loc testProject5 = |project://UnitTest5|;
 
-
-public test bool linesInFile0() = size(linesOfFile(testFile0)) == 3;
-public test bool linesInFile1() = size(linesOfFile(testFile1)) == 6;
-public test bool linesInFile2() = size(linesOfFile(testFile2)) == 6;
-public test bool linesInFile3() = size(linesOfFile(testFile3)) == 6;
-public test bool linesInFile3() = size(linesOfFile(testFile4)) == 39;
+public test bool projectSize1() = sum([getUnitSizePerMethod(testProject1)[x] | x <- getUnitSizePerMethod(testProject1)]) == 7;
+public test bool projectSize2() = sum([getUnitSizePerMethod(testProject2)[x] | x <- getUnitSizePerMethod(testProject2)]) == 12;
+public test bool projectSize3() = sum([getUnitSizePerMethod(testProject3)[x] | x <- getUnitSizePerMethod(testProject3)]) == 9;
+public test bool projectSize4() = sum([getUnitSizePerMethod(testProject4)[x] | x <- getUnitSizePerMethod(testProject4)]) == 20;
+public test bool projectSize5() = sum([getUnitSizePerMethod(testProject5)[x] | x <- getUnitSizePerMethod(testProject5)]) == 8; /* fails because statis analysis is not covered yet */
