@@ -18,6 +18,7 @@ public class Duplication34 {
 				arr[j] = tmp;
 				i++;
 				j--;
+				j--;
 			}
 		}
 		;
@@ -49,6 +50,7 @@ public class Duplication34 {
 				arr[i] = arr[j];
 				arr[j] = tmp;
 				i++;
+				j--;
 				j--;
 			}
 		}

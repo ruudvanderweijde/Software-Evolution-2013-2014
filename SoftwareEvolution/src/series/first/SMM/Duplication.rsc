@@ -32,7 +32,7 @@ private int getScore(num percentage) {
 }
 private num getPrecentageOfDuplication(loc project) {
 	// method matching strings is faster then matching lists;
-	tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatchingWithParams(sourceFilesForProject(project), false, true);
+	tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatchingTrim(sourceFilesForProject(project));
 	//tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatching(sourceFilesForProject(project));
 	//tuple[num allLines, num dupeLines] result = getDuplicationUsingListMatching(sourceFilesForProject(project));
 		
@@ -43,7 +43,7 @@ private num getPrecentageOfDuplication(loc project) {
 }
 
 // this function is deprecated
-private tuple[num, num] getDuplicationUsingStringMatching(set[loc] files) {
+public tuple[num, num] getDuplicationUsingStringMatching(set[loc] files) {
 	// this set will contain the keys of allLines list which are duplicate lines.
 	set[int] duplicateLines = {};
 	
@@ -63,7 +63,7 @@ private tuple[num, num] getDuplicationUsingStringMatching(set[loc] files) {
 }
 
 // this function is deprecated
-private tuple[num, num] getDuplicationUsingListMatching(set[loc] files) {
+public tuple[num, num] getDuplicationUsingListMatching(set[loc] files) {
 	set[int] duplicateLines = {};
 	
 	int beginLine = 0;
@@ -145,6 +145,9 @@ public void triggerMethods() {
 
 }
 
+public tuple[num, num] getDuplicationUsingStringMatchingTrim(set[loc] files) {
+	return getDuplicationUsingStringMatchingWithParams(files, false, true);
+}
 public tuple[num, num] getDuplicationUsingStringMatchingWithParams(set[loc] files, bool stripMLC, bool useTrim) {
 	// this set will contain the keys of allLines list which are duplicate lines.
 	set[int] duplicateLines = {};
@@ -175,7 +178,7 @@ public tuple[num, num] getDuplicationUsingStringMatchingWithParams(set[loc] file
 	return <lines,dupes>;
 }
 public bool testBothVersions(loc file) {
-	return getDuplicationUsingStringMatching(file) == getDuplicationUsingListMatching(file);
+	return getDuplicationUsingStringMatching({file}) == getDuplicationUsingListMatching({file});
 }
 public loc testDupe0 = |project://SoftwareEvolution/src/test/series/first/SMM/Duplication/NoDuplication.java|;
 public loc testDupe1 = |project://SoftwareEvolution/src/test/series/first/SMM/Duplication/Duplication0.java|;
@@ -183,15 +186,22 @@ public loc testDupe2 = |project://SoftwareEvolution/src/test/series/first/SMM/Du
 public loc testDupe3 = |project://SoftwareEvolution/src/test/series/first/SMM/Duplication/Duplication34.java|;
 public loc testDupe4 = |project://SoftwareEvolution/src/test/series/first/SMM/Duplication/Duplication100.java|;
 
-// These need updates
-//public test bool compareFunctions0() = testBothVersions({testDupe0});
-//public test bool compareFunctions1() = testBothVersions({testDupe1});
-//public test bool compareFunctions2() = testBothVersions({testDupe2});
-//public test bool compareFunctions3() = testBothVersions({testDupe3});
-//public test bool compareFunctions4() = testBothVersions({testDupe4});
+// These are deprecated...
+public test bool compareFunctions0() = testBothVersions(testDupe0);
+public test bool compareFunctions1() = testBothVersions(testDupe1);
+public test bool compareFunctions2() = testBothVersions(testDupe2);
+public test bool compareFunctions3() = testBothVersions(testDupe3);
+public test bool compareFunctions4() = testBothVersions(testDupe4);
 
+// These are deprecated...
 public test bool dupesInFile0() = <_, dupes> := getDuplicationUsingStringMatching({testDupe0}) && dupes == 0;
 public test bool dupesInFile1() = <_, dupes> := getDuplicationUsingStringMatching({testDupe1}) && dupes == 0;
 public test bool dupesInFile2() = <_, dupes> := getDuplicationUsingStringMatching({testDupe2}) && dupes == 12;
-public test bool dupesInFile3() = <_, dupes> := getDuplicationUsingStringMatching({testDupe3}) && dupes == 38;
+public test bool dupesInFile3() = <_, dupes> := getDuplicationUsingStringMatching({testDupe3}) && dupes == 40;
 public test bool dupesInFile4() = <_, dupes> := getDuplicationUsingStringMatching({testDupe4}) && dupes == 100;
+
+public test bool dupesInFile0() = <_, dupes> := getDuplicationUsingStringMatchingTrim({testDupe0}) && dupes == 0;
+public test bool dupesInFile1() = <_, dupes> := getDuplicationUsingStringMatchingTrim({testDupe1}) && dupes == 0;
+public test bool dupesInFile2() = <_, dupes> := getDuplicationUsingStringMatchingTrim({testDupe2}) && dupes == 12;
+public test bool dupesInFile3() = <_, dupes> := getDuplicationUsingStringMatchingTrim({testDupe3}) && dupes == 34;
+public test bool dupesInFile4() = <_, dupes> := getDuplicationUsingStringMatchingTrim({testDupe4}) && dupes == 100;
