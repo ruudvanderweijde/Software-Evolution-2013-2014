@@ -148,18 +148,18 @@ private str getColor(int score) {
 
 // example from the paper
 public map[str, int] pp1 = (	
-	"Volume" 		: 5,
-	"Complexity" 	: 1,
-	"Duplication"	: 2,
-	"UnitSize"		: 2,
-	"UnitTesting"	: 3
+	"Volume" 		: 5, /* ++ */
+	"Complexity" 	: 1, /* --*/
+	"Duplication"	: 2, /* - */
+	"UnitSize"		: 2, /* - */
+	"UnitTesting"	: 3  /* o */
 	);
 	
 public map[str, int] mi1 = (	
-	"Analisability" : 3,
-	"Changeability" : 2,
-	"Stability"		: 3,
-	"Testability"	: 2
+	"Analisability" : 3, /* o */
+	"Changeability" : 2, /* - */
+	"Stability"		: 3, /* o */
+	"Testability"	: 2  /* - */
 	);
 	
 public test bool ppToMI1() = mi1 == productPropertiesToMaintainabilityIndex(pp1);
