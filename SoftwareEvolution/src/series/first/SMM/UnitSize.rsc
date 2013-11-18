@@ -112,7 +112,7 @@ public int getScoreOfUnitSize(loc project) {
 	/** end of debug information **/
 	
 	int score = getScoreFromMatrix(percVeryHigh, percHigh, percMedium);
-	logMessage("-- Result: <total> methods initialized. Score: <score>.", 1);
+	logMessage("-- Result: all methods initialized. Score: <score>.", 1);
 	return score;
 }
 
