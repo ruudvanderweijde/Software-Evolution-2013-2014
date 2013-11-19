@@ -61,6 +61,18 @@ int: 4
 ---------------------------------------
 HSQLDB
 ---------------------------------------
+rascal>getScoreOfUnitSize(project1);
+2013-11-18 21:21:31 :: Calculating size per unit...
+2013-11-18 21:33:32 :: Total size: 168932.
+2013-11-18 21:33:32 :: Very high: 30403.
+2013-11-18 21:33:32 :: High: 24520.
+2013-11-18 21:33:32 :: Medium: 64768.
+2013-11-18 21:33:32 :: Very high: 18%.
+2013-11-18 21:33:32 :: High: 15%.
+2013-11-18 21:33:32 :: Medium: 38%.
+2013-11-18 21:33:32 :: -- Result: 168932 methods initialized. Score: 1.
+int :1
+
 rascal>getScoreOfUnitSizeOLD(project1);
 2013-11-18 13:15:56 :: Calculating size per unit...
 2013-11-18 13:28:51 :: Total size: 10860.
@@ -72,17 +84,6 @@ rascal>getScoreOfUnitSizeOLD(project1);
 2013-11-18 13:28:51 :: Medium: 28%.
 2013-11-18 13:28:51 :: -- Result: 10860 methods initialized. Score: 2.
 int: 2
-
-2013-11-18 21:21:31 :: Calculating size per unit...
-2013-11-18 21:33:32 :: Total size: 168932.
-2013-11-18 21:33:32 :: Very high: 30403.
-2013-11-18 21:33:32 :: High: 24520.
-2013-11-18 21:33:32 :: Medium: 64768.
-2013-11-18 21:33:32 :: Very high: 18%.
-2013-11-18 21:33:32 :: High: 15%.
-2013-11-18 21:33:32 :: Medium: 38%.
-2013-11-18 21:33:32 :: -- Result: 168932 methods initialized. Score: 1.
-int :1
 }
 public int getScoreOfUnitSizeNew(loc project) {
 	logMessage("Calculating size per unit...", 1);

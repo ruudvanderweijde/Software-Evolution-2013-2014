@@ -6,10 +6,11 @@ import String;
 import series::first::SMM;
 import lang::java::jdt::Project;
 
+@memo
 public int getLinesOfJava(loc project) {
 	// temporary 'cache' these records
-	if (project == project0) return 24111;
-	if (project == project1) return 168932;
+	//if (project == project0) return 24111;
+	//if (project == project1) return 168932;
 	// default function
 	return (0 | it + linesOfFileSize(f) | loc f <- sourceFilesForProject(project));
 }
@@ -26,7 +27,7 @@ public int counter = 0;
 
 public int linesOfFileSize(loc file) {
 	int count = 0; 
-	counter += 1;
+	//counter += 1;
 	//println("<counter> :: reading file: <file>");
 	for (line <- split("\n", stripMultiLineComments(readFile(file)))) {
 		// skip empty lines

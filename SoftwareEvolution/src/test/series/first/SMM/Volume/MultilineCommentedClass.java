@@ -5,7 +5,7 @@ package test.series.first.SMM.Volume;
  * "Hello World!" to standard output.
  *****/
 class MultilineCommentedClass /*********/{
-	/* two comments */ /* on one line
+	/* two comments */ pp;/* on one line
 	 * and even on multiple lines
 	 */
 	public static void main(String[] args) {
