@@ -15,6 +15,15 @@ public int getLinesOfJava(loc project) {
 	return (0 | it + linesOfFileSize(f) | loc f <- sourceFilesForProject(project));
 }
 
+@memo
+public int getLinesOfJavaTotal(loc project) {
+	// temporary 'cache' these records
+	//if (project == project0) return 24111;
+	//if (project == project1) return 168932;
+	// default function
+	return (0 | it + size(linesOfFileWithComments(f)) | loc f <- sourceFilesForProject(project));
+}
+
 public int getScoreOfVolume(loc project) {
 	logMessage("Calculating lines of code...", 1);
 	int linesOfJava = getLinesOfJava(project);
@@ -63,9 +72,7 @@ public list[str] linesOfFileWithComments(loc file) {
 	return 
 		for (line <- split("\n", readFile(file))) {
 			// skip empty lines
-			if (/^[ \t]*$/ := line) {
-				continue;
-			}
+		
 			append line;
 		};
 }

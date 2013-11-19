@@ -9,6 +9,9 @@ import Relation;
 import util::Math;
 import util::Benchmark;
 
+import lang::java::m3::Core;
+import lang::java::jdt::m3::Core;
+
 import series::first::SMM;
 import series::first::SMM::Volume;
 import lang::java::jdt::Project;
@@ -32,7 +35,12 @@ private int getScore(num percentage) {
 }
 private num getPrecentageOfDuplication(loc project) {
 	// method matching strings is faster then matching lists;
-	tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatchingTrim(sourceFilesForProject(project));
+	M3 projectAST = createM3FromEclipseProject(project);
+	set[loc] allMethods = methods(projectAST);
+	tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatchingTrim(allMethods);
+	
+	//tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatchingTrim(sourceFilesForProject(project));
+	
 	//tuple[num totalLines, num dupeLines] result = getDuplicationUsingStringMatching(sourceFilesForProject(project));
 	//tuple[num allLines, num dupeLines] result = getDuplicationUsingListMatching(sourceFilesForProject(project));
 		
