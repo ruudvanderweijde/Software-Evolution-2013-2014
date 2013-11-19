@@ -18,21 +18,13 @@ str VERY_HIGH = "VERY HIGH";
 
 public map[str,int] initializeStmtMap() {
 	return (
-		"RETURN": 0,
 		"IF": 0,
 		"IF_ELSE": 0,
 		"CASE": 0,
-		"CASE_DEFAULT":0,
 		"FOR" : 0,
 		"WHILE": 0,
-		"DO" : 0,
-		"BREAK" : 0,
-		"CONTINUE" : 0,
 		"SHORTCUT_IF" : 0,
-		"CATCH" : 0,
-		"FINALLY" : 0,
-		"THROW" : 0,
-		"THROWS": 0
+		"CATCH" : 0
 	);
 }
 
@@ -63,31 +55,26 @@ public int cyclometicComplexityPerMethod(loc methodName, M3 projectModel) {
 	methodAST = getMethodASTEclipse(methodName, model = projectModel);
 	map[str, int] stmtMap = initializeStmtMap(); 
 	visit(methodAST) {
-		case \return(_) 	: stmtMap["RETURN"] +=  1;
-    	case \return()		: stmtMap["RETURN"] +=  1;
-    	case \if(_,_)		: stmtMap["IF"] += 1;
-    	case \if(_,_,_) 	: stmtMap["IF_ELSE"] += 2;  // If else means two decision points
+		case \if(_,_)		: stmtMap["IF"] += 1;
+    	case \if(_,_,_) 	: stmtMap["IF_ELSE"] += 1;  // If else means one decision point
     	case \case(_)		: stmtMap["CASE"] += 1;
-    	case \defaultCase() : stmtMap["CASE_DEFAULT"] += 1;
     	case \for(_,_,_)	: stmtMap["FOR"] += 1;
     	case \for(_,_,_,_)  : stmtMap["FOR"] += 1;
     	case \while(_,_)	: stmtMap["WHILE"] += 1;
-    	case \do(_,_)		: stmtMap["DO"] += 1;
-    	case \break()		: stmtMap["BREAK"] += 1;
-    	case \break(_)		: stmtMap["BREAK"] += 1;
-    	case \continue()	: stmtMap["CONTINUE"] += 1;
-    	case \continue(_)	: stmtMap["CONTINUE"] += 1;
     	case \catch(_,_)	: stmtMap["CATCH"] += 1;
-    	case \throw(_)		: stmtMap["THROW"] += 1;
     	 
 		case \conditional(_,_,_) : stmtMap["SHORTCUT_IF"] += 1; 
 		// We do not count "throws"
 		// We do not count "finally", that's always executed
 		// We do not count "try", that's not conditional
+		// No returns - no condition
+		// No do, that's executed at least once.
+		// No break, no continue that's like return		
+		// no case default, it doesnot have a condition.
+		// no throw
 	}
 	//printMap(stmtMap);		
 	int totalDecisionPoints = (0 | it + stmtMap[k] | k <- stmtMap ) + 1 ;
-	if (stmtMap["RETURN"] > 0) { stmtMap["RETURN"] -= 1;};
 	logMessage("Total decision points for method <methodName> method is : <totalDecisionPoints>", 2);
 	return totalDecisionPoints;
 }
