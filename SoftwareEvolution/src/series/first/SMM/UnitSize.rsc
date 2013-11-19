@@ -84,7 +84,7 @@ int: 2
 2013-11-18 21:33:32 :: -- Result: 168932 methods initialized. Score: 1.
 int :1
 }
-public int getScoreOfUnitSize(loc project) {
+public int getScoreOfUnitSizeNew(loc project) {
 	logMessage("Calculating size per unit...", 1);
 	map[loc, num] sizes = getUnitSizePerMethod(project);
 	
@@ -117,7 +117,7 @@ public int getScoreOfUnitSize(loc project) {
 }
 
 @Doc { in this method we measure the unit size based on units, not on lines of code }
-public int getScoreOfUnitSizeOLD(loc project) {
+public int getScoreOfUnitSize(loc project) {
 	//return 0; /* do not use this methods!!! */
 	logMessage("Calculating size per unit...", 1);
 	map[loc, num] sizes = getUnitSizePerMethod(project);
